@@ -16,7 +16,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
 
-    _loading = true;
+    _loading = false;
     super.initState();
   }
 
