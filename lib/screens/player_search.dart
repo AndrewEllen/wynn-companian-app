@@ -3,16 +3,17 @@ import '../widgets/background_container.dart';
 import '../exports.dart';
 import '../constants.dart';
 import 'package:provider/provider.dart';
+
 import '../widgets/searchbar.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+class PlayerSearchScreen extends StatefulWidget {
+  const PlayerSearchScreen({Key? key}) : super(key: key);
 
   @override
-  _HomePageState createState() => _HomePageState();
+  State<PlayerSearchScreen> createState() => _PlayerSearchScreenState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _PlayerSearchScreenState extends State<PlayerSearchScreen> {
   bool _loading = true;
 
   @override
@@ -20,6 +21,7 @@ class _HomePageState extends State<HomePage> {
     _loading = false;
     super.initState();
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -34,14 +36,17 @@ class _HomePageState extends State<HomePage> {
         child: BackgroundContainer(
           child: _loading
               ? const Center(
-                  child: CircularProgressIndicator(
-                  color: appSecondaryColour,
-                ))
+              child: CircularProgressIndicator(
+                color: appSecondaryColour,
+              ))
               : ListView(
-                children: [
-
-                ],
+            children: [
+              Container(
+                margin: EdgeInsets.only(top:22),
+                child: SearchBar(),
               ),
+            ],
+          ),
         ),
       ),
     );

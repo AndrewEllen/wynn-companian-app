@@ -19,7 +19,7 @@ class _MainPageState extends State<MainPage> {
 
   final pages = [
     const HomePage(),
-    const HomePage(),
+    const PlayerSearchScreen(),
     const HomePage(),
     const HomePage(),
     const HomePage(),
@@ -29,19 +29,19 @@ class _MainPageState extends State<MainPage> {
   int _previousIndex = 2;
 
   static const List<Widget> itemsUnselected = [
-    Icon(Icons.fitness_center, size: 30, color: Colors.white,),
-    Icon(MdiIcons.foodApple, size: 30, color: Colors.white,),
-    Icon(Icons.home, size: 30, color: Colors.white,),
-    Icon(MdiIcons.ruler, size: 30, color: Colors.white,),
-    Icon(MdiIcons.informationOutline, size: 30, color: Colors.white,),
+    Icon(Icons.flag, size: 30, color: Colors.white,),
+    Icon(Icons.person_search, size: 30, color: Colors.white,),
+    Icon(Icons.person, size: 30, color: Colors.white,),
+    Icon(MdiIcons.treasureChest, size: 30, color: Colors.white,),
+    Icon(Icons.leaderboard, size: 30, color: Colors.white,),
   ];
 
   static final List<Widget> itemsSelected = [
-    const Icon(Icons.fitness_center, size: 40, color: appGoldStatic1,),
-    const Icon(MdiIcons.foodApple, size: 40, color: appGoldStatic1,),
-    const Icon(Icons.home, size: 40, color: appGoldStatic1,),
-    const Icon(MdiIcons.ruler, size: 40, color: appGoldStatic1,),
-    const Icon(MdiIcons.informationOutline, size: 40, color: appGoldStatic1,),
+    const Icon(Icons.flag, size: 40, color: appGoldStatic1,),
+    const Icon(Icons.person_search, size: 40, color: appGoldStatic1,),
+    const Icon(Icons.person, size: 40, color: appGoldStatic1,),
+    const Icon(MdiIcons.treasureChest, size: 40, color: appGoldStatic1,),
+    const Icon(Icons.leaderboard, size: 40, color: appGoldStatic1,),
   ];
 
   late List<Widget> items;
@@ -79,10 +79,11 @@ class _MainPageState extends State<MainPage> {
     return SafeArea(
           bottom: false,
           child: Scaffold(
+            resizeToAvoidBottomInset: false,
             backgroundColor: appPrimaryColour,
             bottomNavigationBar: CurvedNavigationBar(
                 key: _NavigationBarKey,
-                backgroundColor: Color.fromRGBO(23, 15, 2, 1),
+                backgroundColor: appPrimaryColour,
                 buttonBackgroundColor: appQuarternaryColour,
                 color: appTertiaryColour,
                 index: _currentNavigatorIndex,
