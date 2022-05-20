@@ -1,0 +1,11 @@
+<svg id="web_stuff" data-name="web stuff" xmlns="http://www.w3.org/2000/svg" width="103.89" height="30.02">
+    <defs>
+        <style>
+            .cls-4{fill:#ffe690;opacity:.76}
+        </style>
+    </defs>
+    <path style="fill:#ffe071" d="M0 .07h103.89V30.4H0z"/>
+    <path style="fill:#ffedaf" d="M0 27.95 6.26 4.96 79.53.07H0v27.88z"/>
+    <path style="fill:#ffc94b" d="m103.89 1.83-6.45 23.18-89.61 5.38h96.06V1.83z"/>
+    <path class="cls-4" d="M92.15 0 75.72 30.39h6.78L97.63.07 92.15 0zM18.59 0 2.15 30.39h8.74L26.02.07 18.59 0zM58.34 0 41.9 30.39h14.35L71.38.07 58.34 0zM52.08 0 35.64 30.39h2.64L53.41.07 52.08 0z"/>
+</svg>

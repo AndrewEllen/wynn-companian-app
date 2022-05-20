@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../constants.dart';
 import '../exports.dart';
+import '../widgets/background_container.dart';
 
 
 class MainPage extends StatefulWidget {
@@ -18,6 +19,10 @@ class _MainPageState extends State<MainPage> {
 
   final pages = [
     const HomePage(),
+    const HomePage(),
+    const HomePage(),
+    const HomePage(),
+    const HomePage(),
   ];
 
   int _currentNavigatorIndex = 2;
@@ -32,11 +37,11 @@ class _MainPageState extends State<MainPage> {
   ];
 
   static final List<Widget> itemsSelected = [
-    const Icon(Icons.fitness_center, size: 40, color: appSecondaryColour,),
-    const Icon(MdiIcons.foodApple, size: 40, color: appSecondaryColour,),
-    const Icon(Icons.home, size: 40, color: appSecondaryColour,),
-    const Icon(MdiIcons.ruler, size: 40, color: appSecondaryColour,),
-    const Icon(MdiIcons.informationOutline, size: 40, color: appSecondaryColour,),
+    const Icon(Icons.fitness_center, size: 40, color: appGoldStatic1,),
+    const Icon(MdiIcons.foodApple, size: 40, color: appGoldStatic1,),
+    const Icon(Icons.home, size: 40, color: appGoldStatic1,),
+    const Icon(MdiIcons.ruler, size: 40, color: appGoldStatic1,),
+    const Icon(MdiIcons.informationOutline, size: 40, color: appGoldStatic1,),
   ];
 
   late List<Widget> items;
@@ -77,8 +82,8 @@ class _MainPageState extends State<MainPage> {
             backgroundColor: appPrimaryColour,
             bottomNavigationBar: CurvedNavigationBar(
                 key: _NavigationBarKey,
-                backgroundColor: Colors.transparent,
-                buttonBackgroundColor: appTertiaryColour,
+                backgroundColor: Color.fromRGBO(23, 15, 2, 1),
+                buttonBackgroundColor: appQuarternaryColour,
                 color: appTertiaryColour,
                 index: _currentNavigatorIndex,
                 height: 46,

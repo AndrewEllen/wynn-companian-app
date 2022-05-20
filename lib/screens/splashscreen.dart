@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:wynn_companian_app/widgets/background_container.dart';
 import '../providers/page_change_provider.dart';
 import '../constants.dart';
 
@@ -18,7 +19,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   void fetchData() async {
 
-    await Future.delayed(const Duration(milliseconds: 250));
+    await Future.delayed(const Duration(milliseconds: 1000));
 
     setState(() {
       _loading = false;
@@ -40,30 +41,35 @@ class _SplashScreenState extends State<SplashScreen> {
     double _height = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: appPrimaryColour,
-      body: Stack(
-        children: [
-          Align(
-            alignment: Alignment.topCenter,
-            child: Container(
-              margin: EdgeInsets.only(top: (_height/100)*20),
-              child: const Text(
-                "Wynn",
-                style: TextStyle(
-                  color: appSecondaryColour,
-                  fontSize: 60,
-                  letterSpacing: 3,
-                  fontWeight: FontWeight.w400,
+      body: BackgroundContainer(
+        child: Stack(
+          children: [
+            Align(
+              alignment: Alignment.topCenter,
+              child: Container(
+                margin: EdgeInsets.only(top: (_height/100)*20),
+                child: Image.asset(
+                  "assets/images/wynncraft_logo.webp",
+                  fit: BoxFit.fitHeight,
                 ),
               ),
             ),
-          ),
-          const Align(
-            alignment: Alignment.center,
-            child: CircularProgressIndicator(
-              color: appSecondaryColour,
+            Align(
+              alignment: Alignment.center,
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width/1.25,
+                height: 10,
+                child: const ClipRRect(
+                  borderRadius: BorderRadius.all(Radius.circular(4)),
+                  child: LinearProgressIndicator(
+                    color: appGoldStatic2,
+                    backgroundColor: appGoldStatic1,
+                  ),
+                ),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

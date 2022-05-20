@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../widgets/background_container.dart';
 import '../exports.dart';
 import '../constants.dart';
 import 'package:provider/provider.dart';
@@ -15,14 +16,12 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-
     _loading = false;
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       backgroundColor: appPrimaryColour,
       body: NotificationListener<OverscrollIndicatorNotification>(
@@ -30,16 +29,18 @@ class _HomePageState extends State<HomePage> {
           overscroll.disallowIndicator();
           return true;
         },
-        child: _loading
-            ? const Center(
-                child: CircularProgressIndicator(
-                color: appSecondaryColour,
-              ))
-            : ListView(
-              children: [
+        child: BackgroundContainer(
+          child: _loading
+              ? const Center(
+                  child: CircularProgressIndicator(
+                  color: appSecondaryColour,
+                ))
+              : ListView(
+                children: [
 
-              ],
-            ),
+                ],
+              ),
+        ),
       ),
     );
   }
