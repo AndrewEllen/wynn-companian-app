@@ -66,6 +66,23 @@ class ItemSearchContainer extends StatelessWidget {
               fontWeight: FontWeight.w400,
             ),
           ),
+          subtitle: itemData["accessoryType"] == null ?
+          Text(
+            itemData["type"],
+            style: const TextStyle(
+              color: appGoldStatic1,
+              fontSize: 13,
+              fontWeight: FontWeight.w400,
+            ),
+          ) :
+          Text(
+            itemData["accessoryType"],
+            style: const TextStyle(
+              color: appGoldStatic1,
+              fontSize: 13,
+              fontWeight: FontWeight.w400,
+            ),
+          ),
           leading: Container(
             decoration: BoxDecoration(
               borderRadius: const BorderRadius.all(Radius.circular(3)),
@@ -96,7 +113,9 @@ class ItemSearchContainer extends StatelessWidget {
                     ],
                   ),
                 ),
-                child: Image.asset("assets/images/${itemData["accessoryType"].toLowerCase()}.webp"),
+                child: itemData["accessoryType"] == null ?
+                  Image.asset("assets/images/${itemData["type"].toLowerCase()}.webp") :
+                  Image.asset("assets/images/${itemData["accessoryType"].toLowerCase()}.webp"),
               ),
               ),
             ),

@@ -22,7 +22,7 @@ class _ItemSearchScreenState extends State<ItemSearchScreen> {
     ItemSearchData = [];
     ItemSearchData = await SearchItems(
       context.read<ItemSearchProvider>().itemSearchName,
-      "bracelet",
+      "all",
     );
     return ItemSearchData;
   }

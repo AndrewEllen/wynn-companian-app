@@ -58,8 +58,6 @@ SearchItems(String itemNameSearchParameter, String itemCategorySearchParameter) 
 
     if (response.statusCode == 200) {
         var snapshot = jsonDecode(response.body);
-        print(snapshot);
-        print(snapshot["items"].length);
         return snapshot["items"];
     } else {
         throw Exception("Failed to Load");
