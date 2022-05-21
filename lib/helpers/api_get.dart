@@ -8,19 +8,21 @@ SearchPlayers(String searchParameter) async {
 
     if (response.statusCode == 200) {
         var snapshot = jsonDecode(response.body);
-        print(snapshot["players"]);
-        print(snapshot["players"].runtimeType);
+
         return snapshot["players"];
     } else {
         throw Exception("Failed to Load");
     }
+}
 
-    //print(snapshot["players"]);
-    //print(snapshot["players"].runtimeType);
+SearchUUID(String searchParameter) async {
+    final response = await http
+        .get(Uri.parse('https://api.mojang.com/users/profiles/minecraft/$searchParameter'));
 
-    /*if (response.statusCode == 200) {
-      return Album.fromJson(jsonDecode(response.body));
+    if (response.statusCode == 200) {
+        var snapshot = jsonDecode(response.body);
+        return snapshot["id"];
     } else {
-      throw Exception('Failed to load album');
-    }*/
+        throw Exception("Failed to Load");
+    }
 }

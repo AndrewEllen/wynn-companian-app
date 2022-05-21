@@ -6,6 +6,7 @@ import '../widgets/background_container.dart';
 import '../exports.dart';
 import '../constants.dart';
 import 'package:provider/provider.dart';
+import '../widgets/player_search_container.dart';
 import '../widgets/searchbar.dart';
 
 class PlayerSearchScreen extends StatefulWidget {
@@ -20,7 +21,16 @@ class _PlayerSearchScreenState extends State<PlayerSearchScreen> {
   bool _loading = true;
 
   SearchPlayerDatabase() async {
-    PlayerSearchData = await SearchPlayers(context.read<PlayerSearchProvider>().playerSearchName);
+    PlayerSearchData = [];
+    late List PlayersNames;
+    PlayersNames = await SearchPlayers(context.read<PlayerSearchProvider>().playerSearchName);
+
+    for (int i = 0; i < PlayersNames.length; i++) {
+      var UUID = await SearchUUID(PlayersNames[i]);
+      PlayerSearchData.add([PlayersNames[i], UUID]);
+    }
+
+    print(PlayerSearchData);
     return PlayerSearchData;
   }
 
@@ -70,7 +80,7 @@ class _PlayerSearchScreenState extends State<PlayerSearchScreen> {
                               child: ListView.builder(
                                 itemCount: PlayerSearchData.length,
                                   itemBuilder: (BuildContext context, int index) {
-                                    return Text("Loaded Result");
+                                    return PlayerSearchContainer(playerData: PlayerSearchData[index]);
                                   },
                               ),
                             );

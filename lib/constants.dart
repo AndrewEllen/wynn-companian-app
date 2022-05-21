@@ -4,7 +4,7 @@ const Color appPrimaryColour = Color.fromRGBO(23, 15, 2, 1);
 const Color appSecondaryColour = Color.fromRGBO(0, 190, 34, 1.0);
 const Color appTertiaryColour = Color.fromRGBO(98, 78, 60, 1.0);
 const Color appQuarternaryColour = Color.fromRGBO(156, 136, 104, 1.0);
-const Color appQuinaryColour = Color.fromRGBO(57, 57, 57, 1.0);
+const Color appQuinaryColour = Color.fromRGBO(85, 69, 52, 1.0);
 
 
 const Color appGoldStatic1 = Color.fromRGBO(215, 215, 7, 1.0);
