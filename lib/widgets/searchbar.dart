@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:wynn_companian_app/constants.dart';
+import '../helpers/api_get.dart';
+import '../models/player.dart';
 
 class SearchBar extends StatefulWidget {
   const SearchBar({Key? key}) : super(key: key);
@@ -11,10 +12,14 @@ class SearchBar extends StatefulWidget {
 
 class _SearchBarState extends State<SearchBar> {
   late TextEditingController searchController = TextEditingController();
-  late FocusNode searchFocusNode = FocusNode();
   late GlobalKey<FormState> searchKey = GlobalKey<FormState>();
+  late Future<Album> futurePlayers;
 
   bool _isSelected = true;
+
+  searchForPlayers() {
+    SearchPlayers(searchController.text);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,6 +57,7 @@ class _SearchBarState extends State<SearchBar> {
                     child: TextFormField(
                       controller: searchController,
                       key: searchKey,
+                      textInputAction: TextInputAction.go,
                       cursorColor: appGoldStatic1,
                       textAlign: _isSelected ? TextAlign.left : TextAlign.center,
                       style: const TextStyle(
@@ -82,7 +88,7 @@ class _SearchBarState extends State<SearchBar> {
                       color: Colors.white,
                       size: 22,
                     ),
-                    onPressed: () {},
+                    onPressed: searchForPlayers(),
                   ),
                 ),
               ),

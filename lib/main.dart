@@ -1,3 +1,5 @@
+import 'package:wynn_companian_app/providers/player_search_provider.dart';
+
 import 'constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -9,6 +11,7 @@ void main() async {
     MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (context) => PageChange()),
+          ChangeNotifierProvider(create: (context) => PlayerSearchProvider()),
         ],
         child: const AppMain()
     ),

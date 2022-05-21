@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:wynn_companian_app/providers/player_search_provider.dart';
+import '../helpers/api_get.dart';
+import '../models/player.dart';
 import '../widgets/background_container.dart';
 import '../exports.dart';
 import '../constants.dart';
 import 'package:provider/provider.dart';
-
 import '../widgets/searchbar.dart';
 
 class PlayerSearchScreen extends StatefulWidget {
@@ -22,7 +24,6 @@ class _PlayerSearchScreenState extends State<PlayerSearchScreen> {
     super.initState();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,17 +37,33 @@ class _PlayerSearchScreenState extends State<PlayerSearchScreen> {
         child: BackgroundContainer(
           child: _loading
               ? const Center(
-              child: CircularProgressIndicator(
-                color: appSecondaryColour,
-              ))
+                  child: CircularProgressIndicator(
+                  color: appSecondaryColour,
+                ))
               : ListView(
-            children: [
-              Container(
-                margin: EdgeInsets.only(top:22),
-                child: SearchBar(),
-              ),
-            ],
-          ),
+                  children: [
+                    Container(
+                      margin: EdgeInsets.only(top: 22),
+                      child: SearchBar(),
+                    ),
+                    FutureBuilder<Album>(
+                      future: SearchPlayers(context.read<PlayerSearchProvider>().playerSearchName),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          return Text(
+                            snapshot.data!.title,
+                            style: TextStyle(color: Colors.white),
+                          );
+                        } else {
+                          return const Text(
+                            "error",
+                            style: TextStyle(color: Colors.white),
+                          );
+                        }
+                      },
+                    )
+                  ],
+                ),
         ),
       ),
     );
