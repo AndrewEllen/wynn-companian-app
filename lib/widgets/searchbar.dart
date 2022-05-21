@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:wynn_companian_app/constants.dart';
+import 'package:wynn_companian_app/providers/player_search_provider.dart';
 import '../helpers/api_get.dart';
 import '../models/player.dart';
 
@@ -17,8 +19,19 @@ class _SearchBarState extends State<SearchBar> {
 
   bool _isSelected = true;
 
-  searchForPlayers() {
-    SearchPlayers(searchController.text);
+  void SavePlayerNameForSearch() {
+    if (searchController.text.isNotEmpty) {
+      context.read<PlayerSearchProvider>().updatePlayer(searchController.text);
+    }
+  }
+
+  @override
+  void initState() {
+    if (context.read<PlayerSearchProvider>().playerSearchName.isNotEmpty) {
+      searchController.text = context.read<PlayerSearchProvider>().playerSearchName;
+      _isSelected = false;
+    }
+    super.initState();
   }
 
   @override
@@ -57,7 +70,8 @@ class _SearchBarState extends State<SearchBar> {
                     child: TextFormField(
                       controller: searchController,
                       key: searchKey,
-                      textInputAction: TextInputAction.go,
+                      textInputAction: TextInputAction.search,
+                      onEditingComplete: SavePlayerNameForSearch,
                       cursorColor: appGoldStatic1,
                       textAlign: _isSelected ? TextAlign.left : TextAlign.center,
                       style: const TextStyle(
@@ -70,6 +84,7 @@ class _SearchBarState extends State<SearchBar> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
+                      onFieldSubmitted: (_) => FocusScope.of(context).requestFocus(FocusNode()),
                     ),
                   ),
                 ),
@@ -82,13 +97,13 @@ class _SearchBarState extends State<SearchBar> {
                 width: MediaQuery.of(context).size.width/13,
                 child: Center(
                   child: IconButton(
-                    padding: EdgeInsets.only(top:0.5),
-                    icon: Icon(
+                    padding: const EdgeInsets.only(top:0.5),
+                    icon: const Icon(
                       Icons.search,
                       color: Colors.white,
                       size: 22,
                     ),
-                    onPressed: searchForPlayers(),
+                    onPressed: SavePlayerNameForSearch,
                   ),
                 ),
               ),

@@ -46,22 +46,12 @@ class _PlayerSearchScreenState extends State<PlayerSearchScreen> {
                       margin: EdgeInsets.only(top: 22),
                       child: SearchBar(),
                     ),
-                    FutureBuilder<Album>(
-                      future: SearchPlayers(context.read<PlayerSearchProvider>().playerSearchName),
+                    FutureBuilder(
+                      future: null,
                       builder: (context, snapshot) {
-                        if (snapshot.hasData) {
-                          return Text(
-                            snapshot.data!.title,
-                            style: TextStyle(color: Colors.white),
-                          );
-                        } else {
-                          return const Text(
-                            "error",
-                            style: TextStyle(color: Colors.white),
-                          );
-                        }
+                        return Text("");
                       },
-                    )
+                    ),
                   ],
                 ),
         ),
