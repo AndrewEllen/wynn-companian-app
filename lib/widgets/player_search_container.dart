@@ -30,8 +30,11 @@ class PlayerSearchContainer extends StatelessWidget {
           leading: Container(
             width: 40,
             height: 40,
-            color: Colors.black,
-            child: Image.network('https://crafatar.com/avatars/${playerData[1]}'),
+            color: Colors.transparent,
+            child: FadeInImage(
+              placeholder: AssetImage("assets/images/steve.png"),
+              image: NetworkImage('https://crafatar.com/avatars/${playerData[1]}'),
+            ),
           ),
         ),
       ),

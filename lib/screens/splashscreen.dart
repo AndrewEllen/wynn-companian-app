@@ -19,7 +19,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   void fetchData() async {
 
-    await Future.delayed(const Duration(milliseconds: 1000));
+    await Future.delayed(const Duration(milliseconds: 1500));
 
     setState(() {
       _loading = false;

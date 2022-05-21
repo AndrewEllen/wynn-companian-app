@@ -35,7 +35,7 @@ class _HomePageState extends State<HomePage> {
           child: _loading
               ? const Center(
                   child: CircularProgressIndicator(
-                  color: appSecondaryColour,
+                  color: appGoldStatic1,
                 ))
               : ListView(
                 children: [
