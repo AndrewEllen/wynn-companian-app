@@ -241,7 +241,14 @@ class _PlayerProfileState extends State<PlayerProfile> {
                           alignment: Alignment.centerLeft,
                           child: Container(
                             margin: const EdgeInsets.only(left: 10, top: 1),
-                            child: Text(
+                            child: playerStatsData[0]["meta"]["location"]["server"] == null ? const Text(
+                              "Offline",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ) : Text(
                               "Online on ${playerStatsData[0]["meta"]["location"]["server"]}",
                               style: const TextStyle(
                                 color: Colors.black,
