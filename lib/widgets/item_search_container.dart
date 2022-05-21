@@ -23,10 +23,10 @@ class ItemSearchContainer extends StatelessWidget {
       Color.fromRGBO(255, 255, 255, 0.75),
       Color.fromRGBO(255, 226, 37, 0.7490196078431373),
       Color.fromRGBO(49, 226, 49, 0.75),
+      Color.fromRGBO(217, 0, 255, 0.7490196078431373),
       Color.fromRGBO(73, 239, 239, 0.75),
       Color.fromRGBO(175, 0, 0, 0.75),
-      Color.fromRGBO(207, 19, 241, 0.75),
-      Color.fromRGBO(150, 0, 163, 0.75),
+      Color.fromRGBO(154, 27, 187, 0.7490196078431373),
     ];
 
     return colours[tiers.indexOf(tier)];
@@ -60,27 +60,107 @@ class ItemSearchContainer extends StatelessWidget {
           tileColor: appQuarternaryColour,
           title: Text(
             itemData["name"],
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 18,
-              fontWeight: FontWeight.w400,
+            style: TextStyle(
+              color: chooseNameColour(itemData["tier"].toLowerCase()),
+              fontSize: 19,
+              fontWeight: FontWeight.w700,
+              shadows: const [
+                Shadow(
+                  offset: Offset(0.0, 1.0),
+                  blurRadius: 2.0,
+                  color: Color.fromRGBO(1, 1, 1, 1),
+                ),
+              ],
             ),
           ),
           subtitle: itemData["accessoryType"] == null ?
           Text(
-            itemData["type"],
+            "${itemData["type"]}",
             style: const TextStyle(
               color: appGoldStatic1,
               fontSize: 13,
               fontWeight: FontWeight.w400,
+              shadows: [
+                Shadow(
+                  offset: Offset(0.0, 1.0),
+                  blurRadius: 5.0,
+                  color: Color.fromRGBO(1, 1, 1, 1),
+                ),
+              ],
             ),
           ) :
           Text(
-            itemData["accessoryType"],
+            "${itemData["accessoryType"]}",
             style: const TextStyle(
               color: appGoldStatic1,
               fontSize: 13,
               fontWeight: FontWeight.w400,
+              shadows: [
+                Shadow(
+                  offset: Offset(0.0, 1.0),
+                  blurRadius: 5.0,
+                  color: Color.fromRGBO(1, 1, 1, 1),
+                ),
+              ],
+            ),
+          ),
+          trailing: Container(
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(
+                color: appTertiaryColour,
+                width: 3,
+              ),
+              gradient: const LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  appQuinaryColour,
+                  appQuarternaryColour,
+                  appQuinaryColour,
+                ],
+              ),
+            ),
+            width: 50,
+            height: 50,
+            child: Container(
+              margin: const EdgeInsets.only(top:4),
+              child: Column(
+                children: [
+                  Center(
+                    child: Text(
+                      "${itemData["level"]}",
+                      style: const TextStyle(
+                        color: appGoldStatic1,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700,
+                        shadows: [
+                          Shadow(
+                            offset: Offset(0.0, 1.0),
+                            blurRadius: 5.0,
+                            color: Color.fromRGBO(1, 1, 1, 1),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  const Text(
+                    "LVL",
+                    style: TextStyle(
+                      color: appGoldStatic1,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                      shadows: [
+                        Shadow(
+                          offset: Offset(0.0, 1.0),
+                          blurRadius: 5.0,
+                          color: Color.fromRGBO(1, 1, 1, 1),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
           leading: Container(
