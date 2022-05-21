@@ -16,7 +16,13 @@ class PlayerSearchScreen extends StatefulWidget {
 }
 
 class _PlayerSearchScreenState extends State<PlayerSearchScreen> {
+  late var PlayerSearchData;
   bool _loading = true;
+
+  SearchPlayerDatabase() async {
+    PlayerSearchData = await SearchPlayers(context.read<PlayerSearchProvider>().playerSearchName);
+    return PlayerSearchData;
+  }
 
   @override
   void initState() {
@@ -26,6 +32,7 @@ class _PlayerSearchScreenState extends State<PlayerSearchScreen> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<PlayerSearchProvider>().playerSearchName;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: appPrimaryColour,
@@ -47,10 +54,28 @@ class _PlayerSearchScreenState extends State<PlayerSearchScreen> {
                       child: SearchBar(),
                     ),
                     FutureBuilder(
-                      future: null,
-                      builder: (context, snapshot) {
-                        return Text("");
-                      },
+                      future: SearchPlayerDatabase(),
+                        builder: (context, AsyncSnapshot snapshot) {
+                          if (!snapshot.hasData) {
+                            return const Center(
+                              child: LinearProgressIndicator(
+                                color: appGoldStatic2,
+                                backgroundColor: appGoldStatic1,
+                              ),
+                            );
+                          } else {
+                            return SizedBox(
+                              width: double.infinity,
+                              height: 500,
+                              child: ListView.builder(
+                                itemCount: PlayerSearchData.length,
+                                  itemBuilder: (BuildContext context, int index) {
+                                    return Text("Loaded Result");
+                                  },
+                              ),
+                            );
+                          }
+                        },
                     ),
                   ],
                 ),

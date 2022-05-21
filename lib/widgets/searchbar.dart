@@ -22,6 +22,7 @@ class _SearchBarState extends State<SearchBar> {
   void SavePlayerNameForSearch() {
     if (searchController.text.isNotEmpty) {
       context.read<PlayerSearchProvider>().updatePlayer(searchController.text);
+      FocusScope.of(context).requestFocus(FocusNode());
     }
   }
 

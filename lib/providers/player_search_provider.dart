@@ -11,7 +11,7 @@ class PlayerSearchProvider with ChangeNotifier {
 
   void updatePlayer(String newName) {
     _playerSearchName = newName;
-    //notifyListeners();
+    notifyListeners();
   }
 
   void updatePlayerSearchList(var newSearchNames) {
