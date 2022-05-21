@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:wynn_companian_app/providers/player_search_provider.dart';
 import '../helpers/api_get.dart';
-import '../models/player.dart';
 import '../widgets/background_container.dart';
-import '../exports.dart';
 import '../constants.dart';
 import 'package:provider/provider.dart';
 import '../widgets/player_search_container.dart';
-import '../widgets/searchbar.dart';
+import '../widgets/player_searchbar.dart';
 
 class PlayerSearchScreen extends StatefulWidget {
   const PlayerSearchScreen({Key? key}) : super(key: key);

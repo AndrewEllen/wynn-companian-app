@@ -1,3 +1,4 @@
+import 'package:wynn_companian_app/providers/item_search_provider.dart';
 import 'package:wynn_companian_app/providers/player_search_provider.dart';
 
 import 'constants.dart';
@@ -12,6 +13,7 @@ void main() async {
         providers: [
           ChangeNotifierProvider(create: (context) => PageChange()),
           ChangeNotifierProvider(create: (context) => PlayerSearchProvider()),
+          ChangeNotifierProvider(create: (context) => ItemSearchProvider()),
         ],
         child: const AppMain()
     ),

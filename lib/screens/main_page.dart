@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../constants.dart';
 import '../exports.dart';
 import '../widgets/background_container.dart';
+import 'item_search.dart';
 
 
 class MainPage extends StatefulWidget {
@@ -21,7 +22,7 @@ class _MainPageState extends State<MainPage> {
     const HomePage(),
     const PlayerSearchScreen(),
     const HomePage(),
-    const HomePage(),
+    const ItemSearchScreen(),
     const HomePage(),
   ];
 

@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:wynn_companian_app/constants.dart';
 import 'package:wynn_companian_app/providers/player_search_provider.dart';
-import '../helpers/api_get.dart';
-import '../models/player.dart';
 
 class SearchBar extends StatefulWidget {
   const SearchBar({Key? key}) : super(key: key);
@@ -15,7 +13,6 @@ class SearchBar extends StatefulWidget {
 class _SearchBarState extends State<SearchBar> {
   late TextEditingController searchController = TextEditingController();
   late GlobalKey<FormState> searchKey = GlobalKey<FormState>();
-  late Future<Album> futurePlayers;
 
   bool _isSelected = true;
 

@@ -268,7 +268,7 @@ class _PlayerProfileState extends State<PlayerProfile> {
               alignment: Alignment.bottomCenter,
               child: Container(
                 width: double.infinity,
-                height: 472,
+                height: 466,
                 margin: const EdgeInsets.only(
                   top: 8,
                   bottom: 8,

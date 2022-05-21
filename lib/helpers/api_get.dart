@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import '../models/player.dart';
 
 SearchPlayers(String searchParameter) async {
     final response = await http
@@ -40,6 +39,28 @@ SearchUserStats(String searchParameter) async {
     if (response.statusCode == 200) {
         var snapshot = jsonDecode(response.body);
         return snapshot["data"];
+    } else {
+        throw Exception("Failed to Load");
+    }
+}
+
+
+SearchItems(String itemNameSearchParameter, String itemCategorySearchParameter) async {
+    late String url;
+    if (itemNameSearchParameter.isEmpty) {
+        url = 'https://api.wynncraft.com/public_api.php?action=itemDB&category=$itemCategorySearchParameter';
+    } else {
+        url = 'https://api.wynncraft.com/public_api.php?action=itemDB&search=$itemNameSearchParameter&category=$itemCategorySearchParameter';
+    }
+
+    final response = await http
+        .get(Uri.parse(url));
+
+    if (response.statusCode == 200) {
+        var snapshot = jsonDecode(response.body);
+        print(snapshot);
+        print(snapshot["items"].length);
+        return snapshot["items"];
     } else {
         throw Exception("Failed to Load");
     }
