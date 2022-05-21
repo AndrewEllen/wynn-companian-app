@@ -17,10 +17,10 @@ class PlayerSearchScreen extends StatefulWidget {
 }
 
 class _PlayerSearchScreenState extends State<PlayerSearchScreen> {
-  late var PlayerSearchData = [];
+  late var PlayerSearchData;
 
   SearchPlayerDatabase() async {
-
+    PlayerSearchData = [];
     late List PlayersNames;
     PlayersNames = await SearchPlayers(
         context.read<PlayerSearchProvider>().playerSearchName);
