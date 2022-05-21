@@ -17,6 +17,26 @@ class _PlayerProfileState extends State<PlayerProfile> {
   late var playerStatsData;
   bool _loading = true;
 
+  chooseNameColour(String rank) {
+    List<String> ranks = [
+      "null",
+      "VIP",
+      "VIP+",
+      "HERO",
+      "CHAMPION"
+    ];
+
+    List<Color> colours = [
+      Color.fromRGBO(255, 255, 255, 1.0),
+      Color.fromRGBO(49, 226, 49, 1.0),
+      Color.fromRGBO(73, 239, 239, 1.0),
+      Color.fromRGBO(153, 11, 153, 1.0),
+      Color.fromRGBO(253, 253, 41, 1.0),
+    ];
+
+    return colours[ranks.indexOf(rank)];
+  }
+
   fetchStatsData() async {
     playerStatsData = await SearchUserStats(widget.playerData[1]);
     setState(() {
@@ -134,8 +154,47 @@ class _PlayerProfileState extends State<PlayerProfile> {
                 ),
               ),
             ),
-            const Align(
-              alignment: Alignment.topCenter,
+            Align(
+              alignment: Alignment.topRight,
+              child: Container(
+                margin: const EdgeInsets.only(right:8,top:8),
+                width: 230,
+                height: 184,
+                decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.all(Radius.circular(3)),
+                  border: Border.all(
+                    color: appTertiaryColour,
+                    width: 2,
+                  ),
+                ),
+                child: Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: appQuinaryColour,
+                      width: 2,
+                    ),
+                    color: appQuarternaryColour,
+                  ),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Column(
+                      children: [
+                        Container(
+                          margin: const EdgeInsets.only(left: 8, top: 8),
+                          child: Text(
+                            playerStatsData[0]["username"],
+                            style: TextStyle(
+                              color: chooseNameColour(playerStatsData[0]["meta"]["tag"]["value"]),
+                              fontSize: 24,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
             ),
           ],
         ),
