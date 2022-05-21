@@ -75,11 +75,8 @@ class _ItemSearchScreenState extends State<ItemSearchScreen> {
                       child: ListView.builder(
                         itemCount: ItemSearchData.length,
                         itemBuilder: (BuildContext context, int index) {
-                          return Text(
-                            ItemSearchData[index]["name"],
-                            style: TextStyle(
-                              color: Colors.white,
-                            ),
+                          return ItemSearchContainer(
+                            itemData: ItemSearchData[index],
                           );
                         },
                       ),

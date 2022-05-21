@@ -5,8 +5,32 @@ import 'package:wynn_companian_app/constants.dart';
 import '../providers/page_change_provider.dart';
 
 class ItemSearchContainer extends StatelessWidget {
-  const ItemSearchContainer({Key? key, required this.itemData}) : super(key: key);
-  final List itemData;
+  ItemSearchContainer({Key? key, required this.itemData}) : super(key: key);
+  final Map itemData;
+
+  chooseNameColour(String tier) {
+    List<String> tiers = [
+      "normal",
+      "unique",
+      "set",
+      "rare",
+      "legendary",
+      "fabled",
+      "mythic",
+    ];
+
+    List<Color> colours = const [
+      Color.fromRGBO(255, 255, 255, 0.75),
+      Color.fromRGBO(255, 226, 37, 0.7490196078431373),
+      Color.fromRGBO(49, 226, 49, 0.75),
+      Color.fromRGBO(73, 239, 239, 0.75),
+      Color.fromRGBO(175, 0, 0, 0.75),
+      Color.fromRGBO(207, 19, 241, 0.75),
+      Color.fromRGBO(150, 0, 163, 0.75),
+    ];
+
+    return colours[tiers.indexOf(tier)];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +59,7 @@ class ItemSearchContainer extends StatelessWidget {
         child: ListTile(
           tileColor: appQuarternaryColour,
           title: Text(
-            itemData[0],
+            itemData["name"],
             style: const TextStyle(
               color: Colors.white,
               fontSize: 18,
@@ -60,13 +84,23 @@ class ItemSearchContainer extends StatelessWidget {
               ),
               width: 40,
               height: 40,
-              child: FadeInImage(
-                placeholder: AssetImage("assets/images/steve.png"),
-                image: NetworkImage('https://crafatar.com/avatars/${itemData[1]}?overlay=true'),
+              child: Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [
+                      appQuinaryColour,
+                      chooseNameColour(itemData["tier"].toLowerCase()),
+                      appQuinaryColour,
+                    ],
+                  ),
+                ),
+                child: Image.asset("assets/images/${itemData["accessoryType"].toLowerCase()}.webp"),
+              ),
               ),
             ),
           ),
-        ),
       ),
     );
   }

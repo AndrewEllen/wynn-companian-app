@@ -58,7 +58,15 @@ class PlayerSearchContainer extends StatelessWidget {
                   color: appQuinaryColour,
                   width: 2,
                 ),
-                color: Colors.transparent,
+                gradient: const LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    appQuinaryColour,
+                    appQuarternaryColour,
+                    appQuinaryColour,
+                  ],
+                ),
               ),
               width: 40,
               height: 40,
