@@ -17,27 +17,19 @@ class PlayerSearchScreen extends StatefulWidget {
 }
 
 class _PlayerSearchScreenState extends State<PlayerSearchScreen> {
-  late var PlayerSearchData;
-  bool _loading = true;
+  late var PlayerSearchData = [];
 
   SearchPlayerDatabase() async {
-    PlayerSearchData = [];
+
     late List PlayersNames;
-    PlayersNames = await SearchPlayers(context.read<PlayerSearchProvider>().playerSearchName);
+    PlayersNames = await SearchPlayers(
+        context.read<PlayerSearchProvider>().playerSearchName);
 
     for (int i = 0; i < PlayersNames.length; i++) {
       var UUID = await SearchUUID(PlayersNames[i]);
       PlayerSearchData.add([PlayersNames[i], UUID]);
     }
-
-    print(PlayerSearchData);
     return PlayerSearchData;
-  }
-
-  @override
-  void initState() {
-    _loading = false;
-    super.initState();
   }
 
   @override
@@ -52,12 +44,7 @@ class _PlayerSearchScreenState extends State<PlayerSearchScreen> {
           return true;
         },
         child: BackgroundContainer(
-          child: _loading
-              ? const Center(
-                  child: CircularProgressIndicator(
-                  color: appSecondaryColour,
-                ))
-              : ListView(
+          child: ListView(
                   children: [
                     Container(
                       margin: EdgeInsets.only(top: 22),
@@ -65,27 +52,41 @@ class _PlayerSearchScreenState extends State<PlayerSearchScreen> {
                     ),
                     FutureBuilder(
                       future: SearchPlayerDatabase(),
-                        builder: (context, AsyncSnapshot snapshot) {
-                          if (!snapshot.hasData) {
-                            return const Center(
-                              child: LinearProgressIndicator(
-                                color: appGoldStatic2,
-                                backgroundColor: appGoldStatic1,
+                      builder: (context, AsyncSnapshot snapshot) {
+                        if (!snapshot.hasData) {
+                          if (context.read<PlayerSearchProvider>().playerSearchName.isNotEmpty) {
+                            return Center(
+                              child: Container(
+                                margin: const EdgeInsets.only(top:30),
+                                width: MediaQuery.of(context).size.width/1.25,
+                                height: 10,
+                                child: const ClipRRect(
+                                  borderRadius: BorderRadius.all(Radius.circular(4)),
+                                  child: LinearProgressIndicator(
+                                    color: appGoldStatic2,
+                                    backgroundColor: appGoldStatic1,
+                                  ),
+                                ),
                               ),
                             );
                           } else {
-                            return SizedBox(
-                              width: double.infinity,
-                              height: 500,
-                              child: ListView.builder(
-                                itemCount: PlayerSearchData.length,
-                                  itemBuilder: (BuildContext context, int index) {
-                                    return PlayerSearchContainer(playerData: PlayerSearchData[index]);
-                                  },
-                              ),
-                            );
+                            return const SizedBox.shrink();
                           }
-                        },
+                        } else {
+                          return Container(
+                            margin: const EdgeInsets.only(top:5),
+                            width: double.infinity,
+                            height: MediaQuery.of(context).size.height/1.22,
+                            child: ListView.builder(
+                              itemCount: PlayerSearchData.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                return PlayerSearchContainer(
+                                    playerData: PlayerSearchData[index]);
+                              },
+                            ),
+                          );
+                        }
+                      },
                     ),
                   ],
                 ),

@@ -95,10 +95,19 @@ class _MainPageState extends State<MainPage> {
                 }
             ),
             body: _loading
-                ? const Center(
-                child: CircularProgressIndicator(
-                  color: appSecondaryColour,
-                ))
+                ? Center(
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width/1.25,
+                height: 10,
+                child: const ClipRRect(
+                  borderRadius: BorderRadius.all(Radius.circular(4)),
+                  child: LinearProgressIndicator(
+                    color: appGoldStatic2,
+                    backgroundColor: appGoldStatic1,
+                  ),
+                ),
+              ),
+            )
                 : context.watch<PageChange>().pageWidget,
             ),
     );
