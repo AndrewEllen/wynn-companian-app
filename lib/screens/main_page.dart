@@ -16,7 +16,6 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  final GlobalKey<CurvedNavigationBarState> _NavigationBarKey = GlobalKey();
   bool _loading = true;
 
   final pages = [
@@ -208,7 +207,7 @@ class _MainPageState extends State<MainPage> {
                 beginScale: context.read<PageChange>().transitionScaleFactor,
                 endScale: 1,
                 index: context.read<PageChange>().pageWidgetCacheIndex,
-                children: context.read<PageChange>().pageWidgetCache,
+                children: context.watch<PageChange>().pageWidgetCache,
               ),
               ),
           ),

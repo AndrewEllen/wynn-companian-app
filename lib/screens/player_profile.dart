@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:jiffy/jiffy.dart';
 import 'package:wynncraft_companion_app/models/playerModel.dart';
 
 import '../constants.dart';
@@ -14,27 +17,31 @@ class PlayerProfile extends StatefulWidget {
 }
 
 class _PlayerProfileState extends State<PlayerProfile> {
-  bool _loading = true;
 
   chooseNameColour(String rank, String adminRank) {
-    if (adminRank != "Player") {
+
+    rank = rank.toLowerCase();
+    adminRank = adminRank.toLowerCase();
+
+    if (adminRank != "player") {
       rank = adminRank;
     }
 
     List<String> ranks = [
       "",
       "null",
-      "VIP",
-      "VIP+",
-      "HERO",
-      "CHAMPION",
-      "Administrator",
-      "Moderator",
-      "Media",
-      "Hybrid",
-      "Builder",
-      "GM",
-      "CMD",
+      "vip",
+      "vip+",
+      "hero",
+      "champion",
+      "administrator",
+      "moderator",
+      "media",
+      "hybrid",
+      "item",
+      "builder",
+      "gm",
+      "cmd",
     ];
 
     List<Color> colours = const [
@@ -48,31 +55,159 @@ class _PlayerProfileState extends State<PlayerProfile> {
       Color.fromRGBO(227, 97, 11, 1.0),
       Color.fromRGBO(239, 45, 255, 1.0),
       Color.fromRGBO(51, 148, 177, 1.0),
+      Color.fromRGBO(79, 199, 229, 1.0),
       Color.fromRGBO(20, 79, 168, 1.0),
       Color.fromRGBO(241, 44, 109, 1.0),
       Color.fromRGBO(177, 80, 51, 1.0),
     ];
 
+    if (!ranks.contains(rank)) {
+      rank = "champion";
+    }
+
     return colours[ranks.indexOf(rank)];
   }
 
-  fetchStatsData() async {
-    final playerStatsData = await SearchUserStats(widget.playerData.userName);
+  String firstLoggedInTime() {
 
-    debugPrint(playerStatsData["rank"].toString());
+    final DateTime firstLogin = DateTime.parse(widget.playerData.firstJoin);
+    final Duration timeDifference = DateTime.now().difference(DateTime.parse(widget.playerData.firstJoin));
+    late String lastLoggedInMessage;
 
-    widget.playerData.rank = playerStatsData["rank"];
+    ///Seconds
+    if (timeDifference.inSeconds < 60) {
 
-    setState(() {
-      _loading = false;
-    });
+      if (timeDifference.inSeconds == 1) {
+        lastLoggedInMessage = "(1\u{00A0}Second\u{00A0}Ago)";
+      } else {
+        lastLoggedInMessage = "(${timeDifference.inSeconds}\u{00A0}Seconds\u{00A0}Ago)";
+      }
+
+    }
+    ///Minutes
+    if (timeDifference.inMinutes < 60) {
+
+      if (timeDifference.inMinutes == 1) {
+        lastLoggedInMessage = "(1\u{00A0}Minute\u{00A0}Ago)";
+      } else {
+        lastLoggedInMessage = "(${timeDifference.inMinutes}\u{00A0}Minutes\u{00A0}Ago)";
+      }
+
+    }
+    ///Hours
+    if (timeDifference.inHours < 24) {
+
+      if (timeDifference.inHours == 1) {
+        lastLoggedInMessage = "(1\u{00A0}Hour\u{00A0}Ago)";
+      } else {
+        lastLoggedInMessage = "(${timeDifference.inHours}\u{00A0}Hour\u{00A0}Ago)";
+      }
+
+    }
+    ///Days
+    if (timeDifference.inDays < 30) {
+
+      if (timeDifference.inDays == 1) {
+        lastLoggedInMessage = "(1\u{00A0}Day\u{00A0}Ago)";
+      } else {
+        lastLoggedInMessage = "(${timeDifference.inDays}\u{00A0}Days\u{00A0}Ago)";
+      }
+
+    }
+    ///Months
+    if (timeDifference.inDays < 365) {
+
+      if (timeDifference.inDays >= 30 && timeDifference.inDays <= 31) {
+        lastLoggedInMessage = "(1\u{00A0}Month\u{00A0}Ago)";
+      } else {
+        lastLoggedInMessage = "(${(timeDifference.inDays/30.437).toStringAsFixed(0)}\u{00A0}Months\u{00A0}Ago)";
+      }
+
+    }
+    ///Years
+    if (timeDifference.inDays >= 365) {
+
+      if (timeDifference.inDays >= 365 && timeDifference.inDays < 730) {
+        lastLoggedInMessage = "(1\u{00A0}Year\u{00A0}Ago)";
+      } else {
+        lastLoggedInMessage = "(${(((timeDifference.inDays)/30.437)/12).toStringAsFixed(0)}\u{00A0}Years\u{00A0}Ago)";
+      }
+
+    }
+
+    return "${Jiffy.parse(firstLogin.toString()).format(pattern: "MMMM do yyyy")} $lastLoggedInMessage";
   }
 
-  @override
-  void initState() {
-    fetchStatsData();
-    super.initState();
+
+  String lastLoggedInTime() {
+
+    final Duration timeDifference = DateTime.now().difference(DateTime.parse(widget.playerData.lastJoin));
+    late String lastLoggedInMessage;
+
+    ///Seconds
+    if (timeDifference.inSeconds < 60) {
+
+      if (timeDifference.inSeconds == 1) {
+        return lastLoggedInMessage = "Last seen: A second ago";
+      }
+
+      return lastLoggedInMessage = "Last seen: ${timeDifference.inSeconds} seconds ago";
+
+    }
+    ///Minutes
+    if (timeDifference.inMinutes < 60) {
+
+      if (timeDifference.inMinutes == 1) {
+        return lastLoggedInMessage = "Last seen: A minute ago";
+      }
+
+      return lastLoggedInMessage = "Last seen: ${timeDifference.inMinutes} minutes ago";
+
+    }
+    ///Hours
+    if (timeDifference.inHours < 24) {
+
+      if (timeDifference.inHours == 1) {
+        return lastLoggedInMessage = "Last seen: An hour ago";
+      }
+
+      return lastLoggedInMessage = "Last seen: ${timeDifference.inHours} hours ago";
+
+    }
+    ///Days
+    if (timeDifference.inDays < 30) {
+
+      if (timeDifference.inDays == 1) {
+        return lastLoggedInMessage = "Last seen: A day ago";
+      }
+
+      return lastLoggedInMessage = "Last seen: ${timeDifference.inDays} days ago";
+
+    }
+    ///Months
+    if (timeDifference.inDays < 365) {
+
+      if (timeDifference.inDays >= 30 && timeDifference.inDays <= 60) {
+        return lastLoggedInMessage = "Last seen: A month ago";
+      }
+
+      return lastLoggedInMessage = "Last seen: ${(timeDifference.inDays/30.437).toStringAsFixed(0)} months ago";
+
+    }
+    ///Years
+    if (timeDifference.inDays >= 365) {
+
+      if (timeDifference.inDays >= 365 && timeDifference.inDays < 730) {
+        return lastLoggedInMessage = "Last seen: A year ago";
+      }
+
+      return lastLoggedInMessage = "Last seen: ${(((timeDifference.inDays)/30.437)/12).toStringAsFixed(0)} years ago";
+
+    }
+
+    return "Offline";
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -86,22 +221,7 @@ class _PlayerProfileState extends State<PlayerProfile> {
           },
           child: BackgroundContainer(
             child: Center(
-              child: _loading
-                  ? Center(
-                      child: Container(
-                        margin: const EdgeInsets.only(top: 30),
-                        width: MediaQuery.of(context).size.width / 1.25,
-                        height: 10,
-                        child: const ClipRRect(
-                          borderRadius: BorderRadius.all(Radius.circular(4)),
-                          child: LinearProgressIndicator(
-                            color: appGoldStatic2,
-                            backgroundColor: appGoldStatic1,
-                          ),
-                        ),
-                      ),
-                    )
-                  : Profile(),
+              child: Profile(),
             ),
           ),
         ));
@@ -161,17 +281,24 @@ class _PlayerProfileState extends State<PlayerProfile> {
                       ],
                     ),
                   ),
-                  width: 120,
-                  height: 180,
+                  width: 120.w,
+                  height: 180.h,
                   child: Stack(
                     children: [
-                      Align(
-                        alignment: Alignment.center,
-                        child: FadeInImage(
-                          placeholder:
-                              const AssetImage("assets/images/stevemodel.png"),
-                          image: NetworkImage(
-                              'https://crafatar.com/renders/body/${widget.playerData.uuid}?overlay=true'),
+                      Padding(
+                        padding: EdgeInsets.only(
+                          top: 4.h,
+                          right: 18.0.w,
+                          bottom: 14.h,
+                        ),
+                        child: Align(
+                          alignment: Alignment.center,
+                          child: FadeInImage(
+                            placeholder:
+                                const AssetImage("assets/images/stevemodel.png"),
+                            image: NetworkImage(
+                                'https://crafatar.com/renders/body/${widget.playerData.uuid}?overlay=true'),
+                          ),
                         ),
                       ),
                     ],
@@ -207,7 +334,7 @@ class _PlayerProfileState extends State<PlayerProfile> {
                         Row(
                           children: [
                             Container(
-                              margin: const EdgeInsets.only(left: 10, top: 8),
+                              margin: const EdgeInsets.only(left: 10, top: 10),
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 color: widget.playerData.onlineStatus ==
@@ -215,8 +342,8 @@ class _PlayerProfileState extends State<PlayerProfile> {
                                     ? const Color.fromRGBO(114, 114, 114, 1.0)
                                     : Colors.green,
                               ),
-                              width: 22,
-                              height: 22,
+                              width: 12.w,
+                              height: 12.w,
                             ),
                             Container(
                               margin: const EdgeInsets.only(left: 8, top: 8),
@@ -239,15 +366,23 @@ class _PlayerProfileState extends State<PlayerProfile> {
                                 ),
                               ),
                             ),
+                            Padding(
+                              padding: EdgeInsets.only(top: 12.h, left: 4.w),
+                              child: SvgPicture.network(
+                                "https://cdn.wynncraft.com/${widget.playerData.rankBadgeUrl}",
+                                height: 15,
+                              ),
+                            ),
                           ],
                         ),
+
                         Align(
                           alignment: Alignment.centerLeft,
                           child: Container(
                             margin: const EdgeInsets.only(left: 10, top: 1),
-                            child: widget.playerData.currentServer.isEmpty ? const Text(
-                              "Offline",
-                              style: TextStyle(
+                            child: !widget.playerData.onlineStatus ? Text(
+                              lastLoggedInTime(),
+                              style: const TextStyle(
                                 color: Colors.black,
                                 fontSize: 15,
                                 fontWeight: FontWeight.w500,
@@ -262,6 +397,37 @@ class _PlayerProfileState extends State<PlayerProfile> {
                             ),
                           ),
                         ),
+
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Container(
+                            margin: const EdgeInsets.only(left: 10, top: 1),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text(
+                                  "First seen: ",
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                                Flexible(
+                                  child: Text(
+                                    firstLoggedInTime(),
+                                    style: const TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+
                       ],
                     ),
                   ),

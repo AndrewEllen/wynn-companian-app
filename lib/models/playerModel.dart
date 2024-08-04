@@ -15,12 +15,12 @@ class PlayerSearchModel {
     this.playTime = 0,
     this.guildName = "",
     this.guildPrefix = "",
-    this.guildPlayerRank = "",
-    this.guildsRank = "",
+    this.guildRank = "",
+    this.guildRankStars = "",
     this.activeCharacter = "",
     this.onlineStatus = false,
     this.currentServer = "",
-    this.forumLink = "",
+    this.forumLink = -1,
     this.numberOfWars = 0,
     this.totalLevel = 0,
     this.killedMobs = 0,
@@ -41,12 +41,12 @@ class PlayerSearchModel {
   double playTime;
   String guildName;
   String guildPrefix;
-  String guildPlayerRank;
-  String guildsRank;
+  String guildRank;
+  String guildRankStars;
   String activeCharacter;
   bool onlineStatus;
   String currentServer;
-  String forumLink;
+  int forumLink;
   int numberOfWars;
   int totalLevel;
   int killedMobs;

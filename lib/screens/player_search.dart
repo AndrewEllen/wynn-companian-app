@@ -87,7 +87,7 @@ class _PlayerSearchScreenState extends State<PlayerSearchScreen> {
                               itemCount: snapshot.data!.length,
                               itemBuilder: (BuildContext context, int index) {
                                 return PlayerSearchContainer(
-                                    playerData: snapshot.data![index]
+                                    playerSearchData: snapshot.data![index]
                                 );
                               },
                             ),
