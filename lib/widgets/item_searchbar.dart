@@ -5,7 +5,7 @@ import '../constants.dart';
 import '../providers/item_search_provider.dart';
 
 class SearchBar extends StatefulWidget {
-  const SearchBar({Key? key}) : super(key: key);
+  const SearchBar({super.key});
 
   @override
   State<SearchBar> createState() => _SearchBarState();

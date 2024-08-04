@@ -18,8 +18,8 @@ const LinearGradient appGold = LinearGradient(
     ],
 );
 
-final Color streakColourOrange = Colors.deepOrange;
-final Color streakColourGrey = Colors.grey;
+const Color streakColourOrange = Colors.deepOrange;
+const Color streakColourGrey = Colors.grey;
 
 const BoxDecoration homeBoxDecoration = BoxDecoration(
   color: appTertiaryColour,

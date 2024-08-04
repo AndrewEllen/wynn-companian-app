@@ -5,7 +5,7 @@ import '../helpers/api_get.dart';
 import '../widgets/background_container.dart';
 
 class PlayerProfile extends StatefulWidget {
-  PlayerProfile({Key? key, required this.playerData}) : super(key: key);
+  PlayerProfile({super.key, required this.playerData});
   late List playerData;
 
   @override
@@ -164,7 +164,7 @@ class _PlayerProfileState extends State<PlayerProfile> {
                         alignment: Alignment.center,
                         child: FadeInImage(
                           placeholder:
-                              AssetImage("assets/images/stevemodel.png"),
+                              const AssetImage("assets/images/stevemodel.png"),
                           image: NetworkImage(
                               'https://crafatar.com/renders/body/${playerData[1]}?overlay=true'),
                         ),

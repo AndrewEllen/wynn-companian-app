@@ -6,7 +6,7 @@ import '../providers/player_search_provider.dart';
 
 
 class WynnSearchBar extends StatefulWidget {
-  const WynnSearchBar({Key? key}) : super(key: key);
+  const WynnSearchBar({super.key});
 
   @override
   State<WynnSearchBar> createState() => _WynnSearchBarState();

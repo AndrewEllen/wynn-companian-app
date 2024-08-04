@@ -6,7 +6,7 @@ import '../providers/page_change_provider.dart';
 import '../screens/player_profile.dart';
 
 class PlayerSearchContainer extends StatelessWidget {
-  const PlayerSearchContainer({Key? key, required this.playerData}) : super(key: key);
+  const PlayerSearchContainer({super.key, required this.playerData});
   final List playerData;
 
   @override
@@ -71,7 +71,7 @@ class PlayerSearchContainer extends StatelessWidget {
               width: 40,
               height: 40,
               child: FadeInImage(
-                placeholder: AssetImage("assets/images/steve.png"),
+                placeholder: const AssetImage("assets/images/steve.png"),
                 image: NetworkImage('https://crafatar.com/avatars/${playerData[1]}?overlay=true'),
               ),
             ),

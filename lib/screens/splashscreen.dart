@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
-import '../providers/page_change_provider.dart';
 import '../constants.dart';
 
 import '../widgets/background_container.dart';
 import 'main_page.dart';
 
 class SplashScreen extends StatefulWidget {
-  const SplashScreen({Key? key}) : super(key: key);
+  const SplashScreen({super.key});
 
   @override
   State<SplashScreen> createState() => _SplashScreenState();
@@ -25,7 +23,7 @@ class _SplashScreenState extends State<SplashScreen> {
     setState(() {
       _loading = false;
       Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => MainPage(),
+        MaterialPageRoute(builder: (context) => const MainPage(),
         ),
       );
     });
@@ -39,7 +37,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    double _height = MediaQuery.of(context).size.height;
+    double height = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: appPrimaryColour,
       body: BackgroundContainer(
@@ -48,7 +46,7 @@ class _SplashScreenState extends State<SplashScreen> {
             Align(
               alignment: Alignment.topCenter,
               child: Container(
-                margin: EdgeInsets.only(top: (_height/100)*20),
+                margin: EdgeInsets.only(top: (height/100)*20),
                 child: Image.asset(
                   "assets/images/wynncraft_logo.webp",
                   fit: BoxFit.fitHeight,

@@ -6,10 +6,9 @@ import '../widgets/background_container.dart';
 import '../constants.dart';
 import 'package:provider/provider.dart';
 import '../widgets/player_search_container.dart';
-import '../widgets/player_searchbar.dart';
 
 class PlayerSearchScreen extends StatefulWidget {
-  const PlayerSearchScreen({Key? key}) : super(key: key);
+  const PlayerSearchScreen({super.key});
 
   @override
   State<PlayerSearchScreen> createState() => _PlayerSearchScreenState();
@@ -46,8 +45,8 @@ class _PlayerSearchScreenState extends State<PlayerSearchScreen> {
           child: ListView(
                   children: [
                     Container(
-                      margin: EdgeInsets.only(top: 22),
-                      child: SearchBar(),
+                      margin: const EdgeInsets.only(top: 22),
+                      child: const SearchBar(),
                     ),
                     FutureBuilder(
                       future: SearchPlayerDatabase(),

@@ -6,11 +6,10 @@ import '../widgets/background_container.dart';
 import '../constants.dart';
 import 'package:provider/provider.dart';
 import '../widgets/item_search_container.dart';
-import '../widgets/item_searchbar.dart';
 import '../widgets/player_searchbar.dart';
 
 class ItemSearchScreen extends StatefulWidget {
-  const ItemSearchScreen({Key? key}) : super(key: key);
+  const ItemSearchScreen({super.key});
 
   @override
   State<ItemSearchScreen> createState() => _ItemSearchScreenState();
@@ -43,8 +42,8 @@ class _ItemSearchScreenState extends State<ItemSearchScreen> {
           child: ListView(
             children: [
               Container(
-                margin: EdgeInsets.only(top: 22),
-                child: WynnSearchBar(),
+                margin: const EdgeInsets.only(top: 22),
+                child: const WynnSearchBar(),
               ),
               FutureBuilder(
                 future: SearchItemDatabase(),

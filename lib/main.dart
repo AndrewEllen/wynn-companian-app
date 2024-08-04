@@ -26,7 +26,7 @@ void main() async {
 }
 
 class AppMain extends StatefulWidget {
-  const AppMain({Key? key}) : super(key: key);
+  const AppMain({super.key});
 
   @override
   State<AppMain> createState() => _AppMainState();

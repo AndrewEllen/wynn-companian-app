@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import '../widgets/background_container.dart';
-import '../exports.dart';
 import '../constants.dart';
-import 'package:provider/provider.dart';
-import '../widgets/player_searchbar.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({super.key});
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -38,7 +35,7 @@ class _HomePageState extends State<HomePage> {
                   color: appGoldStatic1,
                 ))
               : ListView(
-                children: [
+                children: const [
 
                 ],
               ),

@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 
 import '../constants.dart';
-import '../providers/page_change_provider.dart';
 
 class ItemSearchContainer extends StatelessWidget {
-  ItemSearchContainer({Key? key, required this.itemData}) : super(key: key);
+  const ItemSearchContainer({super.key, required this.itemData});
   final Map itemData;
 
   chooseNameColour(String tier) {
