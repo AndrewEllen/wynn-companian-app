@@ -1,3 +1,4 @@
+import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -253,7 +254,12 @@ class _PlayerProfileState extends State<PlayerProfile> {
                 children: [
                   Expanded(
                     child: Container(
-                      margin: const EdgeInsets.all(2),
+                      margin: const EdgeInsets.only(
+                        top: 2,
+                        bottom: 1,
+                        left: 2,
+                        right: 1,
+                      ),
                       decoration: BoxDecoration(
                         borderRadius: const BorderRadius.all(Radius.circular(3)),
                         border: Border.all(
@@ -301,7 +307,12 @@ class _PlayerProfileState extends State<PlayerProfile> {
                   Expanded(
                     flex: 2,
                     child: Container(
-                      margin: const EdgeInsets.all(2),
+                      margin: const EdgeInsets.only(
+                        top: 2,
+                        bottom: 1,
+                        left: 1,
+                        right: 2,
+                      ),
                       decoration: BoxDecoration(
                         borderRadius: const BorderRadius.all(Radius.circular(3)),
                         border: Border.all(
@@ -338,18 +349,38 @@ class _PlayerProfileState extends State<PlayerProfile> {
                                     padding: EdgeInsets.only(top: widget.playerData.rankBadgeUrl.isEmpty ? 8.0 : 0),
                                     child: Row(
                                       children: [
-                                        Container(
+                                        !widget.playerData.onlineStatus ? Container(
                                           margin: EdgeInsets.only(left: 10.w),
-                                          decoration: BoxDecoration(
+                                          decoration: const BoxDecoration(
                                             shape: BoxShape.circle,
-                                            color: widget.playerData.onlineStatus ==
-                                                false
-                                                ? const Color.fromRGBO(114, 114, 114, 1.0)
-                                                : Colors.green,
+                                            color: Color.fromRGBO(114, 114, 114, 1.0),
                                           ),
                                           width: 12.w,
                                           height: 12.w,
+                                        ) :
+                                        Container(
+                                          width: 12.w,
+                                          height: 12.w,
+                                          margin: EdgeInsets.only(left: 10.w),
+                                          child: AvatarGlow(
+                                            glowCount: 2,
+                                            startDelay: const Duration(milliseconds: 1000),
+                                            glowColor: Colors.greenAccent,
+                                            glowShape: BoxShape.circle,
+                                            animate: true,
+                                            curve: Curves.fastOutSlowIn,
+                                            child: const Material(
+                                              elevation: 8.0,
+                                              shape: CircleBorder(),
+                                              color: Colors.transparent,
+                                              child: CircleAvatar(
+                                                backgroundColor: Colors.green,
+                                                radius: 12,
+                                              ),
+                                            ),
+                                          ),
                                         ),
+
                                         Container(
                                           margin: EdgeInsets.only(left: 6.w),
                                           child: Text(
@@ -428,6 +459,44 @@ class _PlayerProfileState extends State<PlayerProfile> {
                                   ),
                                 ),
                               ),
+
+                              Align(
+                                alignment: Alignment.centerLeft,
+                                child: Container(
+                                  margin: const EdgeInsets.only(left: 10, top: 1),
+                                  child: Row(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+
+                                      Flexible(
+                                        child: Text(
+
+                                          [for (int i = 0; i < widget.playerData.guildRankStars.length/3; i++) {
+                                            "\u2605"
+                                          }].join("").replaceAll(new RegExp(r"\p{P}", unicode: true), ""),
+                                          style: const TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
+                                      ),
+
+                                      Flexible(
+                                        child: Text(
+                                          "${widget.playerData.guildRank} of ${widget.playerData.guildName}",
+                                          style: const TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
+                                      ),
+
+                                    ],
+                                  ),
+                                ),
+                              ),
                     
                             ],
                           ),
@@ -441,7 +510,12 @@ class _PlayerProfileState extends State<PlayerProfile> {
             ),
             Expanded(
               child: Container(
-                margin: const EdgeInsets.all(2),
+                margin: const EdgeInsets.only(
+                  top: 1,
+                  bottom: 2,
+                  left: 2,
+                  right: 2,
+                ),
                 decoration: BoxDecoration(
                   borderRadius: const BorderRadius.all(Radius.circular(3)),
                   border: Border.all(
