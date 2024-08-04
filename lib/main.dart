@@ -1,5 +1,7 @@
-import 'package:wynn_companian_app/providers/item_search_provider.dart';
-import 'package:wynn_companian_app/providers/player_search_provider.dart';
+
+
+import 'package:wynncraft_companion_app/providers/item_search_provider.dart';
+import 'package:wynncraft_companion_app/providers/player_search_provider.dart';
 
 import 'constants.dart';
 import 'package:flutter/material.dart';
@@ -47,7 +49,7 @@ class _AppMainState extends State<AppMain> {
               width: 3,
               color: Colors.transparent,
             ),
-            primary: appSecondaryColour,
+            backgroundColor: appSecondaryColour,
             shadowColor: Colors.transparent,
             elevation: 0,
             shape: RoundedRectangleBorder(

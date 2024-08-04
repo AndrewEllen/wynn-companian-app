@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:wynn_companian_app/widgets/background_container.dart';
+
 import '../providers/page_change_provider.dart';
 import '../constants.dart';
 
+import '../widgets/background_container.dart';
 import 'main_page.dart';
 
 class SplashScreen extends StatefulWidget {

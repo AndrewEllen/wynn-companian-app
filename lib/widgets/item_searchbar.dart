@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:wynn_companian_app/constants.dart';
+
+import '../constants.dart';
 import '../providers/item_search_provider.dart';
 
 class SearchBar extends StatefulWidget {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:wynn_companian_app/providers/player_search_provider.dart';
+
 import '../helpers/api_get.dart';
+import '../providers/player_search_provider.dart';
 import '../widgets/background_container.dart';
 import '../constants.dart';
 import 'package:provider/provider.dart';

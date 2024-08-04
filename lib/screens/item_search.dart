@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:wynn_companian_app/providers/item_search_provider.dart';
-import 'package:wynn_companian_app/providers/player_search_provider.dart';
 import '../helpers/api_get.dart';
+import '../providers/item_search_provider.dart';
+import '../providers/player_search_provider.dart';
 import '../widgets/background_container.dart';
 import '../constants.dart';
 import 'package:provider/provider.dart';
 import '../widgets/item_search_container.dart';
 import '../widgets/item_searchbar.dart';
+import '../widgets/player_searchbar.dart';
 
 class ItemSearchScreen extends StatefulWidget {
   const ItemSearchScreen({Key? key}) : super(key: key);
@@ -43,7 +44,7 @@ class _ItemSearchScreenState extends State<ItemSearchScreen> {
             children: [
               Container(
                 margin: EdgeInsets.only(top: 22),
-                child: SearchBar(),
+                child: WynnSearchBar(),
               ),
               FutureBuilder(
                 future: SearchItemDatabase(),

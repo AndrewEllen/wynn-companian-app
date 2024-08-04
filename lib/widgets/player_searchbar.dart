@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:wynn_companian_app/constants.dart';
-import 'package:wynn_companian_app/providers/player_search_provider.dart';
 
-class SearchBar extends StatefulWidget {
-  const SearchBar({Key? key}) : super(key: key);
+import '../constants.dart';
+import '../providers/player_search_provider.dart';
+
+
+class WynnSearchBar extends StatefulWidget {
+  const WynnSearchBar({Key? key}) : super(key: key);
 
   @override
-  State<SearchBar> createState() => _SearchBarState();
+  State<WynnSearchBar> createState() => _WynnSearchBarState();
 }
 
-class _SearchBarState extends State<SearchBar> {
+class _WynnSearchBarState extends State<WynnSearchBar> {
   late TextEditingController searchController = TextEditingController();
   late GlobalKey<FormState> searchKey = GlobalKey<FormState>();
 

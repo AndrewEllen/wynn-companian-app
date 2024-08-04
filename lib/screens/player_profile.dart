@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:wynn_companian_app/helpers/api_get.dart';
-import 'package:wynn_companian_app/widgets/background_container.dart';
 
 import '../constants.dart';
+import '../helpers/api_get.dart';
+import '../widgets/background_container.dart';
 
 class PlayerProfile extends StatefulWidget {
   PlayerProfile({Key? key, required this.playerData}) : super(key: key);
