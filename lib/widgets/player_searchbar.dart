@@ -5,14 +5,14 @@ import '../constants.dart';
 import '../providers/player_search_provider.dart';
 
 
-class WynnSearchBar extends StatefulWidget {
-  const WynnSearchBar({super.key});
+class PlayerSearchBar extends StatefulWidget {
+  const PlayerSearchBar({super.key});
 
   @override
-  State<WynnSearchBar> createState() => _WynnSearchBarState();
+  State<PlayerSearchBar> createState() => _PlayerSearchBarState();
 }
 
-class _WynnSearchBarState extends State<WynnSearchBar> {
+class _PlayerSearchBarState extends State<PlayerSearchBar> {
   late TextEditingController searchController = TextEditingController();
   late GlobalKey<FormState> searchKey = GlobalKey<FormState>();
 

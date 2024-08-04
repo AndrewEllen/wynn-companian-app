@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wynncraft_companion_app/models/playerModel.dart';
 
 import '../helpers/api_get.dart';
 import '../providers/player_search_provider.dart';
@@ -6,6 +7,7 @@ import '../widgets/background_container.dart';
 import '../constants.dart';
 import 'package:provider/provider.dart';
 import '../widgets/player_search_container.dart';
+import '../widgets/player_searchbar.dart';
 
 class PlayerSearchScreen extends StatefulWidget {
   const PlayerSearchScreen({super.key});
@@ -15,19 +17,25 @@ class PlayerSearchScreen extends StatefulWidget {
 }
 
 class _PlayerSearchScreenState extends State<PlayerSearchScreen> {
-  late var PlayerSearchData;
 
   SearchPlayerDatabase() async {
-    PlayerSearchData = [];
-    late List PlayersNames;
-    PlayersNames = await SearchPlayers(
-        context.read<PlayerSearchProvider>().playerSearchName);
+    List<PlayerSearchModel> playerSearchData = [];
+    late Map playersNames;
+    playersNames = await SearchPlayers(context.read<PlayerSearchProvider>().playerSearchName);
+    debugPrint("Received");
 
-    for (int i = 0; i < PlayersNames.length; i++) {
-      var UUID = await SearchUUID(PlayersNames[i]);
-      PlayerSearchData.add([PlayersNames[i], UUID]);
-    }
-    return PlayerSearchData;
+    playersNames.forEach((key, value) {
+
+      playerSearchData.add(
+        PlayerSearchModel(
+            userName: value,
+            uuid: key,
+        )
+      );
+
+    });
+
+    return playerSearchData;
   }
 
   @override
@@ -46,7 +54,7 @@ class _PlayerSearchScreenState extends State<PlayerSearchScreen> {
                   children: [
                     Container(
                       margin: const EdgeInsets.only(top: 22),
-                      child: const SearchBar(),
+                      child: const PlayerSearchBar(),
                     ),
                     FutureBuilder(
                       future: SearchPlayerDatabase(),
@@ -76,10 +84,11 @@ class _PlayerSearchScreenState extends State<PlayerSearchScreen> {
                             width: double.infinity,
                             height: MediaQuery.of(context).size.height/1.22,
                             child: ListView.builder(
-                              itemCount: PlayerSearchData.length,
+                              itemCount: snapshot.data!.length,
                               itemBuilder: (BuildContext context, int index) {
                                 return PlayerSearchContainer(
-                                    playerData: PlayerSearchData[index]);
+                                    playerData: snapshot.data![index]
+                                );
                               },
                             ),
                           );

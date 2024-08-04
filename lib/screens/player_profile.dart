@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wynncraft_companion_app/models/playerModel.dart';
 
 import '../constants.dart';
 import '../helpers/api_get.dart';
@@ -6,15 +7,13 @@ import '../widgets/background_container.dart';
 
 class PlayerProfile extends StatefulWidget {
   PlayerProfile({super.key, required this.playerData});
-  late List playerData;
+  late PlayerSearchModel playerData;
 
   @override
   State<PlayerProfile> createState() => _PlayerProfileState();
 }
 
 class _PlayerProfileState extends State<PlayerProfile> {
-  late final List playerData;
-  late var playerStatsData;
   bool _loading = true;
 
   chooseNameColour(String rank, String adminRank) {
@@ -23,6 +22,7 @@ class _PlayerProfileState extends State<PlayerProfile> {
     }
 
     List<String> ranks = [
+      "",
       "null",
       "VIP",
       "VIP+",
@@ -38,6 +38,7 @@ class _PlayerProfileState extends State<PlayerProfile> {
     ];
 
     List<Color> colours = const [
+      Color.fromRGBO(255, 255, 255, 1.0),
       Color.fromRGBO(255, 255, 255, 1.0),
       Color.fromRGBO(49, 226, 49, 1.0),
       Color.fromRGBO(73, 239, 239, 1.0),
@@ -56,7 +57,12 @@ class _PlayerProfileState extends State<PlayerProfile> {
   }
 
   fetchStatsData() async {
-    playerStatsData = await SearchUserStats(widget.playerData[1]);
+    final playerStatsData = await SearchUserStats(widget.playerData.userName);
+
+    debugPrint(playerStatsData["rank"].toString());
+
+    widget.playerData.rank = playerStatsData["rank"];
+
     setState(() {
       _loading = false;
     });
@@ -64,8 +70,7 @@ class _PlayerProfileState extends State<PlayerProfile> {
 
   @override
   void initState() {
-    playerData = widget.playerData;
-    playerStatsData = fetchStatsData();
+    fetchStatsData();
     super.initState();
   }
 
@@ -166,7 +171,7 @@ class _PlayerProfileState extends State<PlayerProfile> {
                           placeholder:
                               const AssetImage("assets/images/stevemodel.png"),
                           image: NetworkImage(
-                              'https://crafatar.com/renders/body/${playerData[1]}?overlay=true'),
+                              'https://crafatar.com/renders/body/${widget.playerData.uuid}?overlay=true'),
                         ),
                       ),
                     ],
@@ -205,8 +210,7 @@ class _PlayerProfileState extends State<PlayerProfile> {
                               margin: const EdgeInsets.only(left: 10, top: 8),
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
-                                color: playerStatsData[0]["meta"]["location"]
-                                            ["online"] ==
+                                color: widget.playerData.onlineStatus ==
                                         false
                                     ? const Color.fromRGBO(114, 114, 114, 1.0)
                                     : Colors.green,
@@ -217,7 +221,7 @@ class _PlayerProfileState extends State<PlayerProfile> {
                             Container(
                               margin: const EdgeInsets.only(left: 8, top: 8),
                               child: Text(
-                                "${playerStatsData[0]["username"]}",
+                                widget.playerData.userName,
                                 style: TextStyle(
                                   shadows: const [
                                     Shadow(
@@ -227,8 +231,8 @@ class _PlayerProfileState extends State<PlayerProfile> {
                                     ),
                                   ],
                                   color: chooseNameColour(
-                                    playerStatsData[0]["meta"]["tag"]["value"],
-                                    playerStatsData[0]["rank"],
+                                    widget.playerData.rank,
+                                    widget.playerData.devRank,
                                   ),
                                   fontSize: 24,
                                   fontWeight: FontWeight.w700,
@@ -241,7 +245,7 @@ class _PlayerProfileState extends State<PlayerProfile> {
                           alignment: Alignment.centerLeft,
                           child: Container(
                             margin: const EdgeInsets.only(left: 10, top: 1),
-                            child: playerStatsData[0]["meta"]["location"]["server"] == null ? const Text(
+                            child: widget.playerData.currentServer.isEmpty ? const Text(
                               "Offline",
                               style: TextStyle(
                                 color: Colors.black,
@@ -249,7 +253,7 @@ class _PlayerProfileState extends State<PlayerProfile> {
                                 fontWeight: FontWeight.w500,
                               ),
                             ) : Text(
-                              "Online on ${playerStatsData[0]["meta"]["location"]["server"]}",
+                              "Online on ${widget.playerData.currentServer}",
                               style: const TextStyle(
                                 color: Colors.black,
                                 fontSize: 15,

@@ -4,14 +4,14 @@ import 'package:provider/provider.dart';
 import '../constants.dart';
 import '../providers/item_search_provider.dart';
 
-class SearchBar extends StatefulWidget {
-  const SearchBar({super.key});
+class ItemSearchBar extends StatefulWidget {
+  const ItemSearchBar({super.key});
 
   @override
-  State<SearchBar> createState() => _SearchBarState();
+  State<ItemSearchBar> createState() => _ItemSearchBarState();
 }
 
-class _SearchBarState extends State<SearchBar> {
+class _ItemSearchBarState extends State<ItemSearchBar> {
   late TextEditingController searchController = TextEditingController();
   late GlobalKey<FormState> searchKey = GlobalKey<FormState>();
 

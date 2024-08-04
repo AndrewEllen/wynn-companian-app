@@ -6,7 +6,7 @@ import '../widgets/background_container.dart';
 import '../constants.dart';
 import 'package:provider/provider.dart';
 import '../widgets/item_search_container.dart';
-import '../widgets/player_searchbar.dart';
+import '../widgets/item_searchbar.dart';
 
 class ItemSearchScreen extends StatefulWidget {
   const ItemSearchScreen({super.key});
@@ -43,7 +43,7 @@ class _ItemSearchScreenState extends State<ItemSearchScreen> {
             children: [
               Container(
                 margin: const EdgeInsets.only(top: 22),
-                child: const WynnSearchBar(),
+                child: const ItemSearchBar(),
               ),
               FutureBuilder(
                 future: SearchItemDatabase(),

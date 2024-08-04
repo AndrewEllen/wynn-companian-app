@@ -1,12 +1,21 @@
 import 'dart:convert';
+import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 
 SearchPlayers(String searchParameter) async {
-    final response = await http
-        .get(Uri.parse('https://api.wynncraft.com/public_api.php?action=statsSearch&search=$searchParameter'));
+
+    debugPrint(searchParameter);
+
+    final http.Response response = await http
+        .get(Uri.parse('https://api.wynncraft.com/v3/search/$searchParameter'));
+
+    debugPrint("Searched");
 
     if (response.statusCode == 200) {
-        var snapshot = jsonDecode(response.body);
+
+        debugPrint("Processing Response");
+
+        var snapshot = json.decode(response.body);
 
         return snapshot["players"];
     } else {
@@ -16,7 +25,7 @@ SearchPlayers(String searchParameter) async {
 
 SearchUUID(String searchParameter) async {
     final response = await http
-        .get(Uri.parse('https://api.mojang.com/users/profiles/minecraft/$searchParameter'));
+        .get(Uri.parse('https://api.mojang.com/users/profiles/minecraft/$searchParameter?only=players'));
 
     if (response.statusCode == 200) {
         var snapshot = jsonDecode(response.body);
@@ -28,17 +37,12 @@ SearchUUID(String searchParameter) async {
 
 SearchUserStats(String searchParameter) async {
 
-    var i = 0;
-    final dashes = {2, 3, 4, 5};
-
-    final dashedSearchParameter = searchParameter.splitMapJoin(RegExp('....'), onNonMatch: (s) => dashes.contains(i++)? '-' : '');
-
     final response = await http
-        .get(Uri.parse('https://api.wynncraft.com/v2/player/$dashedSearchParameter/stats'));
+        .get(Uri.parse('https://api.wynncraft.com/v3/player/$searchParameter?fullResult'));
 
     if (response.statusCode == 200) {
-        var snapshot = jsonDecode(response.body);
-        return snapshot["data"];
+        var snapshot = json.decode(response.body);
+        return snapshot;
     } else {
         throw Exception("Failed to Load");
     }

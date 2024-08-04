@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:wynncraft_companion_app/models/playerModel.dart';
 
 import '../constants.dart';
 import '../providers/page_change_provider.dart';
@@ -7,7 +8,7 @@ import '../screens/player_profile.dart';
 
 class PlayerSearchContainer extends StatelessWidget {
   const PlayerSearchContainer({super.key, required this.playerData});
-  final List playerData;
+  final PlayerSearchModel playerData;
 
   @override
   Widget build(BuildContext context) {
@@ -34,10 +35,10 @@ class PlayerSearchContainer extends StatelessWidget {
           color: appQuarternaryColour,
         ),
         child: ListTile(
-          onTap: () => context.read<PageChange>().changePage(PlayerProfile(playerData: playerData,)),
+          onTap: () => context.read<PageChange>().changePageCache(PlayerProfile(playerData: playerData,)),
           tileColor: appQuarternaryColour,
           title: Text(
-            playerData[0],
+            playerData.userName,
             style: const TextStyle(
               color: Colors.white,
               fontSize: 18,
@@ -72,7 +73,7 @@ class PlayerSearchContainer extends StatelessWidget {
               height: 40,
               child: FadeInImage(
                 placeholder: const AssetImage("assets/images/steve.png"),
-                image: NetworkImage('https://crafatar.com/avatars/${playerData[1]}?overlay=true'),
+                image: NetworkImage('https://crafatar.com/avatars/${playerData.uuid}?overlay=true'),
               ),
             ),
           ),
