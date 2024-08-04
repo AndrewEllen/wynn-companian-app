@@ -231,12 +231,6 @@ class _PlayerProfileState extends State<PlayerProfile> {
     return Container(
       width: double.infinity,
       height: double.infinity,
-      margin: const EdgeInsets.only(
-        top: 20,
-        bottom: 40,
-        left: 20,
-        right: 20,
-      ),
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.all(Radius.circular(3)),
         border: Border.all(
@@ -252,170 +246,150 @@ class _PlayerProfileState extends State<PlayerProfile> {
           ),
           color: appQuarternaryColour,
         ),
-        child: Stack(
+        child: Column(
           children: [
-            Align(
-              alignment: Alignment.topLeft,
-              child: Container(
-                margin: const EdgeInsets.only(left: 8, top: 8),
-                decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.all(Radius.circular(3)),
-                  border: Border.all(
-                    color: appTertiaryColour,
-                    width: 2,
-                  ),
-                ),
-                child: Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: appQuinaryColour,
-                      width: 2,
-                    ),
-                    gradient: const LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                      colors: [
-                        appQuinaryColour,
-                        appQuarternaryColour,
-                        appQuinaryColour,
-                      ],
-                    ),
-                  ),
-                  width: 120.w,
-                  height: 180.h,
-                  child: Stack(
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.only(
-                          top: 4.h,
-                          right: 18.0.w,
-                          bottom: 14.h,
-                        ),
-                        child: Align(
-                          alignment: Alignment.center,
-                          child: FadeInImage(
-                            placeholder:
-                                const AssetImage("assets/images/stevemodel.png"),
-                            image: NetworkImage(
-                                'https://crafatar.com/renders/body/${widget.playerData.uuid}?overlay=true'),
-                          ),
+            IntrinsicHeight(
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Container(
+                      margin: const EdgeInsets.all(2),
+                      decoration: BoxDecoration(
+                        borderRadius: const BorderRadius.all(Radius.circular(3)),
+                        border: Border.all(
+                          color: appTertiaryColour,
+                          width: 2,
                         ),
                       ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            Align(
-              alignment: Alignment.topRight,
-              child: Container(
-                margin: const EdgeInsets.only(right: 8, top: 8),
-                width: 230,
-                height: 184,
-                decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.all(Radius.circular(3)),
-                  border: Border.all(
-                    color: appTertiaryColour,
-                    width: 2,
-                  ),
-                ),
-                child: Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: appQuinaryColour,
-                      width: 2,
-                    ),
-                    color: appQuarternaryColour,
-                  ),
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Column(
-                      children: [
-                        Row(
+                      child: Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: appQuinaryColour,
+                            width: 2,
+                          ),
+                          gradient: const LinearGradient(
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                            colors: [
+                              appQuinaryColour,
+                              appQuarternaryColour,
+                              appQuinaryColour,
+                            ],
+                          ),
+                        ),
+                        width: 120.w,
+                        height: 180.h,
+                        child: Stack(
                           children: [
-                            Container(
-                              margin: const EdgeInsets.only(left: 10, top: 10),
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: widget.playerData.onlineStatus ==
-                                        false
-                                    ? const Color.fromRGBO(114, 114, 114, 1.0)
-                                    : Colors.green,
-                              ),
-                              width: 12.w,
-                              height: 12.w,
-                            ),
-                            Container(
-                              margin: const EdgeInsets.only(left: 8, top: 8),
-                              child: Text(
-                                widget.playerData.userName,
-                                style: TextStyle(
-                                  shadows: const [
-                                    Shadow(
-                                      offset: Offset(0.0, 1.0),
-                                      blurRadius: 5.0,
-                                      color: Color.fromRGBO(1, 1, 1, 1),
-                                    ),
-                                  ],
-                                  color: chooseNameColour(
-                                    widget.playerData.rank,
-                                    widget.playerData.devRank,
-                                  ),
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.w700,
-                                ),
-                              ),
-                            ),
                             Padding(
-                              padding: EdgeInsets.only(top: 12.h, left: 4.w),
-                              child: SvgPicture.network(
-                                "https://cdn.wynncraft.com/${widget.playerData.rankBadgeUrl}",
-                                height: 15,
+                              padding: EdgeInsets.all(2.h),
+                              child: Align(
+                                alignment: Alignment.center,
+                                child: FadeInImage(
+                                  placeholder:
+                                      const AssetImage("assets/images/stevemodel.png"),
+                                  image: NetworkImage(
+                                      'https://crafatar.com/renders/body/${widget.playerData.uuid}?overlay=true'),
+                                ),
                               ),
                             ),
                           ],
                         ),
-
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Container(
-                            margin: const EdgeInsets.only(left: 10, top: 1),
-                            child: !widget.playerData.onlineStatus ? Text(
-                              lastLoggedInTime(),
-                              style: const TextStyle(
-                                color: Colors.black,
-                                fontSize: 15,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ) : Text(
-                              "Online on ${widget.playerData.currentServer}",
-                              style: const TextStyle(
-                                color: Colors.black,
-                                fontSize: 15,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                          ),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    flex: 2,
+                    child: Container(
+                      margin: const EdgeInsets.all(2),
+                      decoration: BoxDecoration(
+                        borderRadius: const BorderRadius.all(Radius.circular(3)),
+                        border: Border.all(
+                          color: appTertiaryColour,
+                          width: 2,
                         ),
-
-                        Align(
+                      ),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: appQuinaryColour,
+                            width: 2,
+                          ),
+                          color: appQuarternaryColour,
+                        ),
+                        child: Align(
                           alignment: Alignment.centerLeft,
-                          child: Container(
-                            margin: const EdgeInsets.only(left: 10, top: 1),
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Text(
-                                  "First seen: ",
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w500,
+                          child: Column(
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  widget.playerData.rankBadgeUrl.isNotEmpty ? Padding(
+                                    padding: EdgeInsets.only(
+                                      top: 10.h,
+                                      left: 10.w,
+                                    ),
+                                    child: SvgPicture.network(
+                                      "https://cdn.wynncraft.com/${widget.playerData.rankBadgeUrl}",
+                                      height: 15,
+                                    ),
+                                  ) : const SizedBox.shrink(),
+                                  Padding(
+                                    padding: EdgeInsets.only(top: widget.playerData.rankBadgeUrl.isEmpty ? 8.0 : 0),
+                                    child: Row(
+                                      children: [
+                                        Container(
+                                          margin: EdgeInsets.only(left: 10.w),
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            color: widget.playerData.onlineStatus ==
+                                                false
+                                                ? const Color.fromRGBO(114, 114, 114, 1.0)
+                                                : Colors.green,
+                                          ),
+                                          width: 12.w,
+                                          height: 12.w,
+                                        ),
+                                        Container(
+                                          margin: EdgeInsets.only(left: 6.w),
+                                          child: Text(
+                                            widget.playerData.userName,
+                                            style: TextStyle(
+                                              shadows: const [
+                                                Shadow(
+                                                  offset: Offset(0.0, 1.0),
+                                                  blurRadius: 5.0,
+                                                  color: Color.fromRGBO(1, 1, 1, 1),
+                                                ),
+                                              ],
+                                              color: chooseNameColour(
+                                                widget.playerData.rank,
+                                                widget.playerData.devRank,
+                                              ),
+                                              fontSize: 24,
+                                              fontWeight: FontWeight.w700,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                ),
-                                Flexible(
-                                  child: Text(
-                                    firstLoggedInTime(),
+                                ],
+                              ),
+                    
+                              Align(
+                                alignment: Alignment.centerLeft,
+                                child: Container(
+                                  margin: const EdgeInsets.only(left: 10, top: 1),
+                                  child: !widget.playerData.onlineStatus ? Text(
+                                    lastLoggedInTime(),
+                                    style: const TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ) : Text(
+                                    "Online on ${widget.playerData.currentServer}",
                                     style: const TextStyle(
                                       color: Colors.black,
                                       fontSize: 15,
@@ -423,28 +397,51 @@ class _PlayerProfileState extends State<PlayerProfile> {
                                     ),
                                   ),
                                 ),
-                              ],
-                            ),
+                              ),
+                    
+                              Align(
+                                alignment: Alignment.centerLeft,
+                                child: Container(
+                                  margin: const EdgeInsets.only(left: 10, top: 1),
+                                  child: Row(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      const Text(
+                                        "First seen: ",
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                      Flexible(
+                                        child: Text(
+                                          firstLoggedInTime(),
+                                          style: const TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                    
+                            ],
                           ),
                         ),
-
-                      ],
+                      ),
                     ),
                   ),
-                ),
+              
+                ],
               ),
             ),
-            Align(
-              alignment: Alignment.bottomCenter,
+            Expanded(
               child: Container(
-                width: double.infinity,
-                height: 466,
-                margin: const EdgeInsets.only(
-                  top: 8,
-                  bottom: 8,
-                  left: 8,
-                  right: 8,
-                ),
+                margin: const EdgeInsets.all(2),
                 decoration: BoxDecoration(
                   borderRadius: const BorderRadius.all(Radius.circular(3)),
                   border: Border.all(
