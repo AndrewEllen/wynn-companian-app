@@ -22,6 +22,7 @@ class PlayerSearchModel {
     this.currentServer = "",
     this.forumLink = -1,
     this.numberOfWars = 0,
+    this.numberOfRaids = 0,
     this.totalLevel = 0,
     this.killedMobs = 0,
     this.chestsFound = 0,
@@ -48,6 +49,7 @@ class PlayerSearchModel {
   String currentServer;
   int forumLink;
   int numberOfWars;
+  int numberOfRaids;
   int totalLevel;
   int killedMobs;
   int chestsFound;

@@ -407,11 +407,48 @@ class _PlayerProfileState extends State<PlayerProfile> {
                                   ),
                                 ],
                               ),
-                    
+
+                              IntrinsicHeight(
+                                child: Container(
+                                  alignment: Alignment.centerLeft,
+                                  margin: const EdgeInsets.only(left: 10, top: 1),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Flexible(
+                                        child: Text(
+
+                                          [for (int i = 0; i < widget.playerData.guildRankStars.length/3; i++) {
+                                            "\u2605"
+                                          }].join("").replaceAll(RegExp(r"\p{P}", unicode: true), ""),
+                                          style: const TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
+                                      ),
+
+                                      Flexible(
+                                        child: Text(
+                                          "${widget.playerData.guildRank} of ${widget.playerData.guildName}",
+                                          style: const TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
+                                      ),
+
+                                    ],
+                                  ),
+                                ),
+                              ),
+
                               Align(
                                 alignment: Alignment.centerLeft,
                                 child: Container(
-                                  margin: const EdgeInsets.only(left: 10, top: 1),
+                                  margin: EdgeInsets.only(left: 10, top: 12.h),
                                   child: !widget.playerData.onlineStatus ? Text(
                                     lastLoggedInTime(),
                                     style: const TextStyle(
@@ -460,44 +497,6 @@ class _PlayerProfileState extends State<PlayerProfile> {
                                 ),
                               ),
 
-                              Align(
-                                alignment: Alignment.centerLeft,
-                                child: Container(
-                                  margin: const EdgeInsets.only(left: 10, top: 1),
-                                  child: Row(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-
-                                      Flexible(
-                                        child: Text(
-
-                                          [for (int i = 0; i < widget.playerData.guildRankStars.length/3; i++) {
-                                            "\u2605"
-                                          }].join("").replaceAll(new RegExp(r"\p{P}", unicode: true), ""),
-                                          style: const TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.w500,
-                                          ),
-                                        ),
-                                      ),
-
-                                      Flexible(
-                                        child: Text(
-                                          "${widget.playerData.guildRank} of ${widget.playerData.guildName}",
-                                          style: const TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.w500,
-                                          ),
-                                        ),
-                                      ),
-
-                                    ],
-                                  ),
-                                ),
-                              ),
-                    
                             ],
                           ),
                         ),
@@ -510,6 +509,7 @@ class _PlayerProfileState extends State<PlayerProfile> {
             ),
             Expanded(
               child: Container(
+                width: double.maxFinite,
                 margin: const EdgeInsets.only(
                   top: 1,
                   bottom: 2,
@@ -531,6 +531,180 @@ class _PlayerProfileState extends State<PlayerProfile> {
                     ),
                     color: appQuarternaryColour,
                   ),
+
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+
+                        Flexible(
+                            child: RichText(
+                              text: TextSpan(
+                                text: "Total Level: ",
+                                style: const TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                children: [
+                                  TextSpan(
+                                    text: "${widget.playerData.totalLevel}",
+                                    style: const TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                ]
+                              ),
+                            ),
+                        ),
+
+                        Flexible(
+                          child: RichText(
+                            text: TextSpan(
+                                text: "Total Playtime: ",
+                                style: const TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                children: [
+                                  TextSpan(
+                                    text: "${widget.playerData.playTime}",
+                                    style: const TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                ]
+                            ),
+                          ),
+                        ),
+
+                        Flexible(
+                          child: RichText(
+                            text: TextSpan(
+                                text: "Total Mobs Killed: ",
+                                style: const TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                children: [
+                                  TextSpan(
+                                    text: "${widget.playerData.killedMobs}",
+                                    style: const TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                ]
+                            ),
+                          ),
+                        ),
+
+                        Flexible(
+                          child: RichText(
+                            text: TextSpan(
+                                text: "Total Chests Looted: ",
+                                style: const TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                children: [
+                                  TextSpan(
+                                    text: "${widget.playerData.chestsFound}",
+                                    style: const TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                ]
+                            ),
+                          ),
+                        ),
+
+                        SizedBox(height: 12.h),
+
+                        Flexible(
+                          child: RichText(
+                            text: TextSpan(
+                                text: "Total Wars Fought: ",
+                                style: const TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                children: [
+                                  TextSpan(
+                                    text: "${widget.playerData.numberOfWars}",
+                                    style: const TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                ]
+                            ),
+                          ),
+                        ),
+
+                        Flexible(
+                          child: RichText(
+                            text: TextSpan(
+                                text: "Total Raids Completed: ",
+                                style: const TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                children: [
+                                  TextSpan(
+                                    text: "${widget.playerData.numberOfRaids}",
+                                    style: const TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                ]
+                            ),
+                          ),
+                        ),
+
+                        Flexible(
+                          child: RichText(
+                            text: TextSpan(
+                                text: "Total Dungeons Completed: ",
+                                style: const TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                children: [
+                                  TextSpan(
+                                    text: "${widget.playerData.totalDungeonsCompleted}",
+                                    style: const TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                ]
+                            ),
+                          ),
+                        ),
+
+                      ],
+                    ),
+                  ),
+
                 ),
               ),
             ),

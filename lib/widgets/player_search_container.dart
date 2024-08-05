@@ -33,6 +33,7 @@ class PlayerSearchContainer extends StatelessWidget {
     playerData.currentServer = playerStatsData["server"] ?? "";
     playerData.forumLink = playerStatsData["forumLink"] ?? -1;
     playerData.numberOfWars = playerStatsData["globalData"]["wars"] ?? 0;
+    playerData.numberOfRaids = playerStatsData["globalData"]["raids"] != null ? playerStatsData["globalData"]["raids"]["total"] ?? 0 : 0;
     playerData.totalLevel = playerStatsData["globalData"]["totalLevel"] ?? 0;
     playerData.killedMobs = playerStatsData["globalData"]["killedMobs"] ?? 0;
     playerData.chestsFound = playerStatsData["globalData"]["chestsFound"] ?? 0;
