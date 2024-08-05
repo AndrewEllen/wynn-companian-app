@@ -2,6 +2,7 @@ import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:intl/intl.dart';
 import 'package:jiffy/jiffy.dart';
 import 'package:wynncraft_companion_app/models/playerModel.dart';
 
@@ -18,6 +19,16 @@ class PlayerProfile extends StatefulWidget {
 }
 
 class _PlayerProfileState extends State<PlayerProfile> {
+
+  NumberFormat formatterDecimal = NumberFormat.decimalPatternDigits(
+    locale: 'en_us',
+    decimalDigits: 2,
+  );
+
+  NumberFormat formatter = NumberFormat.decimalPatternDigits(
+    locale: 'en_us',
+    decimalDigits: 0,
+  );
 
   chooseNameColour(String rank, String adminRank) {
 
@@ -453,15 +464,15 @@ class _PlayerProfileState extends State<PlayerProfile> {
                                     lastLoggedInTime(),
                                     style: const TextStyle(
                                       color: Colors.black,
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w500,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w600,
                                     ),
                                   ) : Text(
                                     "Online on ${widget.playerData.currentServer}",
                                     style: const TextStyle(
                                       color: Colors.black,
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w500,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w600,
                                     ),
                                   ),
                                 ),
@@ -478,8 +489,8 @@ class _PlayerProfileState extends State<PlayerProfile> {
                                         "First seen: ",
                                         style: TextStyle(
                                           color: Colors.black,
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w500,
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w600,
                                         ),
                                       ),
                                       Flexible(
@@ -487,8 +498,8 @@ class _PlayerProfileState extends State<PlayerProfile> {
                                           firstLoggedInTime(),
                                           style: const TextStyle(
                                             color: Colors.black,
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.w500,
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w600,
                                           ),
                                         ),
                                       ),
@@ -549,11 +560,11 @@ class _PlayerProfileState extends State<PlayerProfile> {
                                 ),
                                 children: [
                                   TextSpan(
-                                    text: "${widget.playerData.totalLevel}",
+                                    text: "${formatter.format(widget.playerData.totalLevel)} Levels",
                                     style: const TextStyle(
                                       color: Colors.black,
                                       fontSize: 15,
-                                      fontWeight: FontWeight.w500,
+                                      fontWeight: FontWeight.w400,
                                     ),
                                   ),
                                 ]
@@ -572,11 +583,11 @@ class _PlayerProfileState extends State<PlayerProfile> {
                                 ),
                                 children: [
                                   TextSpan(
-                                    text: "${widget.playerData.playTime}",
+                                    text: "${formatterDecimal.format(widget.playerData.playTime)} Hours",
                                     style: const TextStyle(
                                       color: Colors.black,
                                       fontSize: 15,
-                                      fontWeight: FontWeight.w500,
+                                      fontWeight: FontWeight.w400,
                                     ),
                                   ),
                                 ]
@@ -595,11 +606,11 @@ class _PlayerProfileState extends State<PlayerProfile> {
                                 ),
                                 children: [
                                   TextSpan(
-                                    text: "${widget.playerData.killedMobs}",
+                                    text: "${formatter.format(widget.playerData.killedMobs)} Mobs",
                                     style: const TextStyle(
                                       color: Colors.black,
                                       fontSize: 15,
-                                      fontWeight: FontWeight.w500,
+                                      fontWeight: FontWeight.w400,
                                     ),
                                   ),
                                 ]
@@ -618,11 +629,11 @@ class _PlayerProfileState extends State<PlayerProfile> {
                                 ),
                                 children: [
                                   TextSpan(
-                                    text: "${widget.playerData.chestsFound}",
+                                    text: "${formatter.format(widget.playerData.chestsFound)} Chests",
                                     style: const TextStyle(
                                       color: Colors.black,
                                       fontSize: 15,
-                                      fontWeight: FontWeight.w500,
+                                      fontWeight: FontWeight.w400,
                                     ),
                                   ),
                                 ]
@@ -643,11 +654,11 @@ class _PlayerProfileState extends State<PlayerProfile> {
                                 ),
                                 children: [
                                   TextSpan(
-                                    text: "${widget.playerData.numberOfWars}",
+                                    text: "${formatter.format(widget.playerData.numberOfWars)} Wars",
                                     style: const TextStyle(
                                       color: Colors.black,
                                       fontSize: 15,
-                                      fontWeight: FontWeight.w500,
+                                      fontWeight: FontWeight.w400,
                                     ),
                                   ),
                                 ]
@@ -666,11 +677,11 @@ class _PlayerProfileState extends State<PlayerProfile> {
                                 ),
                                 children: [
                                   TextSpan(
-                                    text: "${widget.playerData.numberOfRaids}",
+                                    text: "${formatter.format(widget.playerData.numberOfRaids)} Raids",
                                     style: const TextStyle(
                                       color: Colors.black,
                                       fontSize: 15,
-                                      fontWeight: FontWeight.w500,
+                                      fontWeight: FontWeight.w400,
                                     ),
                                   ),
                                 ]
@@ -689,11 +700,11 @@ class _PlayerProfileState extends State<PlayerProfile> {
                                 ),
                                 children: [
                                   TextSpan(
-                                    text: "${widget.playerData.totalDungeonsCompleted}",
+                                    text: "${formatter.format(widget.playerData.totalDungeonsCompleted)} Dungeons",
                                     style: const TextStyle(
                                       color: Colors.black,
                                       fontSize: 15,
-                                      fontWeight: FontWeight.w500,
+                                      fontWeight: FontWeight.w400,
                                     ),
                                   ),
                                 ]
